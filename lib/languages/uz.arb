@@ -1,0 +1,97 @@
+{
+  "@@locale": "uz",
+  "appTitle": "NPUU Amaliyot",
+  "login": "Kirish",
+  "logout": "Chiqish",
+  "enter": "NPUU\nInternship",
+  "loginInput": "Logini kiriting",
+  "password": "Parol",
+  "passInput": "Parolni kiriting",
+  "forgotPass":"Parolni unutdingizmi?",
+
+  "empty": "Kirish maydoni bo'sh",
+  "correct": "Noto'g'ri foydalanuvchi nomi yoki parol.",
+  "serverError": "Server xatosi.",
+  "errorPlease": "Xato, iltimos, keyinroq qayta urinib ko'ring.",
+
+  "notStudent": "Siz TALABA emassiz",
+
+  "dataIsOutdated": "Foydalanuvchi ma'lumotlari eskirgan. Iltimos ilovaga qaytadan kiring.",
+  "unknownError": "Nomaʼlum xatolik",
+  "connectionTimeout": "Internet bilan bogʻlanib bo‘lmadi",
+
+  "logsAndMap": "Urinishlar",
+
+  "nowInter" : "Joriy amaliyot",
+  "notChoseInter" : "Amaliyot tanlanmagan!",
+  "interList" : "Amaliyotlar ro'yxati",
+  "interCheckIn": "Tanlandi",
+  "logOutTitle" : "Tizimdan chiqish",
+  "logOutContent" : "Siz rostdan ham tizimni tark etmoqchimisiz?",
+
+  "noText" : "Yo'q",
+  "yesText" : "Ha",
+
+  "notEnterTxt" : "O'TILMAGAN",
+
+  "toComeText" : "KELISH",
+  "toGoText" : "KETISH",
+
+  "taskText" : "topshiriq",
+
+  "view" : "Ko'rish",
+
+  "semesterKText" : "Kuzgi semestr",
+  "semesterBText" : "Bahorgi semestr",
+  "lostTimeText" : "Yoqotilgan soat",
+
+  "moreText" : "Ko'proq",
+
+  "tasksScoreText" : "Topshiriqlar bali",
+  "tasksText" :"Topshiriqlar",
+
+  "attendancesCalender" : "Davomat kalendari",
+  "choseDay" : "Kun tanlang",
+  "locationMessage" : "GPS ruxsati doimiy rad etilgan!",
+
+  "notData" : "Bu kunda ma'lumot yo‘q",
+  "lieLocation" : "Yolg‘on Lokatsiya aniqlangan!",
+  "goOutAtt" : "Ketish davomati",
+  "toGoAtt" : "Ketish davomati",
+  "toComeAtt" : "Kelish davomati",
+
+  "logsEmpty" : "Bu kunda loglar yo‘q",
+
+  "copyText": "Nusxalandi",
+
+  "settings": "Sozlamalar",
+  "passSuccess": "Parol muvaffaqiyatli yangilandi",
+  "passError": "Xatolik yuz berdi",
+  "passConnection": "Tarmoq xatosi",
+  "passOld": "Eski parol",
+  "passEnterOld": "Eski parolni kiriting",
+  "passNew": "Yangi parol",
+  "passEnterNew": "Parol kamida 6 ta belgidan iborat bo‘lsin",
+  "passCheck": "Yangi parolni tasdiqlang",
+  "passNotTrue": "Parollar mos emas",
+  "passOk": "Parolni yangilash",
+
+  "score": "Reyting",
+  "scoreGroup": "Guruh",
+  "scoreType": "Mutaxassislik",
+  "sortScore": "Ball bo'yicha saralash",
+  "sortLostTime": "Qoldirilgan soatlar bo'yicha saralash",
+  "attendance": "Davomat",
+  "scoreA": "Ball",
+
+  "comIn": "Kelish xabari",
+  "comOut": "Ketish xabari",
+  "optionalMessage": "Xabar yozish (ixtiyoriy)...",
+
+  "cancelText" : "Bekor qilish",
+  "submitText" : "Yuborish",
+  "submitMainIdeTxt": "\"YUBORISH\" tugmasini bosangiz amaliyot o'tash joyining kelish/ketish davomati jo'natiladi.",
+
+  "notWorking": "Bu funksiya ishlamaydi. Yaratish jarayonida"
+
+}

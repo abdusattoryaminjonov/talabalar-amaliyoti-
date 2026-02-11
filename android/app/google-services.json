@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "345242266104",
+    "project_id": "npuu-8d76d",
+    "storage_bucket": "npuu-8d76d.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:345242266104:android:713f4e13c714e21f8ace0d",
+        "android_client_info": {
+          "package_name": "uz.uznpu.mobile"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCSs6oYhJoafuKgD5xoVhNBYwCG92Z2gIw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

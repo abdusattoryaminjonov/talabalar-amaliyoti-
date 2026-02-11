@@ -1,0 +1,95 @@
+{
+  "@@locale": "en",
+  "appTitle": "NPUU Internship",
+  "login": "Login",
+  "logout": "Log out",
+  "enter": "NPUU\nInternship",
+  "loginInput": "Enter login",
+  "password": "Password",
+  "passInput": "Enter password",
+  "forgotPass":"Forgot your password?",
+
+  "empty": "The input field is empty",
+  "incorrect": "Incorrect username or password.",
+  "serverError": "Server error.",
+  "errorPlease": "Error, please try again later.",
+
+  "notStudent": "You are not a STUDENT.",
+
+  "dataIsOutdated": "User data is out of date. Please log in again.",
+  "unknownError": "Unknown error",
+  "connectionTimeout": "Unable to connect to the Internet",
+
+  "logsAndMap": "Attempts",
+  "nowInter" : "Current Interval",
+  "notChoseInter" : "Interval not selected!",
+  "interList" : "Intervals list",
+  "interCheckIn" : "Selected",
+  "logOutTitle" : "Logout",
+  "logOutContent" : "Are you sure you want to log out?",
+
+  "noText" : "No",
+  "yesText" : "Yes",
+
+  "notEnterTxt" : "NOT ENTERED",
+
+  "toComeText" : "COMING",
+  "toGoText" : "GOING",
+
+  "taskText" : "task",
+
+  "view" : "View",
+
+  "semesterKText" : "Fall semester",
+  "semesterBText" : "Spring semester",
+  "lostTimeText" : "Lost hours",
+
+  "moreText" : "More",
+
+  "tasksScoreText" : "Assignment score",
+  "tasksText" :"Assignments",
+
+  "attendancesCalender" : "Attendance Calendar",
+  "choseDay" : "Choose Day",
+  "locationMessage" : "GPS permission permanently denied!",
+
+  "notData" : "No data on this day",
+  "lieLocation" : "Lie Location detected!",
+  "goOutAtt" : "Outgoing attendance",
+  "toGoAtt" : "Outgoing attendance",
+  "toComeAtt" : "Arriving attendance",
+
+  "logsEmpty" : "No logs for this day",
+
+  "copyText": "Copied",
+
+  "settings": "Settings",
+  "passSuccess": "Password updated successfully",
+  "passError": "An error occurred",
+  "passConnection": "Network error",
+  "passOld": "Old password",
+  "passEnterOld": "Enter old password",
+  "passNew": "New password",
+  "passEnterNew": "Password must be at least 6 characters",
+  "passCheck": "Confirm new password",
+  "passNotTrue": "Passwords do not match",
+  "passOk": "Update password",
+
+  "score": "Rating",
+  "scoreGroup": "Group",
+  "scoreType": "Specialization",
+  "sortScore": "Sort by Score",
+  "sortLostTime": "Sort by Hours Left",
+  "attendance": "Attendance",
+  "scoreA": "Score",
+
+  "comIn": "Incoming message",
+  "comOut": "Outgoing message",
+  "optionalMessage": "Write a message (optional)...",
+
+  "cancelText" : "Cancel",
+  "submitText" : "Submit",
+
+  "submitMainIdeTxt": "By clicking the \"SUBMIT\" button, the arrival/departure attendance of the internship location will be sent.",
+  "notWorking": "This feature is not working. It is being created."
+}
