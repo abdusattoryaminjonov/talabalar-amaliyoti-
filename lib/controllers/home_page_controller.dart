@@ -1,13 +1,14 @@
 import 'dart:convert';
 
 import 'package:animated_snack_bar/animated_snack_bar.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
+// import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive/hive.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
+import 'package:tap/widgets/dialogs/show_notice_dialog.dart';
 import 'package:tutorial_coach_mark/tutorial_coach_mark.dart';
 
 import '../constands/appcolors.dart';
@@ -24,8 +25,6 @@ import '../pages/student_pages/login/login_page.dart';
 import '../pages/student_pages/quota_page/quota_page.dart';
 import '../pages/student_pages/settings_page/settings_page.dart';
 import '../pages/student_pages/task_page/tasks_page.dart';
-import '../services/app_color/theme_controller.dart';
-import '../services/app_color/theme_service.dart';
 import '../services/http_service.dart';
 import '../services/language_service.dart';
 import '../services/nosql_service.dart';
@@ -95,30 +94,30 @@ class HomePageController extends GetxController with GetTickerProviderStateMixin
     Icons.chat_outlined,
   ];
 
-  Future<void> requestPermission() async {
-    FirebaseMessaging messaging = FirebaseMessaging.instance;
-
-    NotificationSettings settings = await messaging.requestPermission(
-      alert: true,
-      badge: true,
-      sound: true,
-    );
-
-    print('User permission: ${settings.authorizationStatus}');
-  }
-
-  Future<void> getToken() async {
-    String? token = await FirebaseMessaging.instance.getToken();
-    print("FCM Token: $token");
-  }
-  Future<void> subscribeToTopic() async {
-    await FirebaseMessaging.instance.subscribeToTopic("all_users");
-    print("User all_users topic ga qo'shildi");
-  }
-
-  Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-    print("Background message: ${message.messageId}");
-  }
+  // Future<void> requestPermission() async {
+  //   FirebaseMessaging messaging = FirebaseMessaging.instance;
+  //
+  //   NotificationSettings settings = await messaging.requestPermission(
+  //     alert: true,
+  //     badge: true,
+  //     sound: true,
+  //   );
+  //
+  //   print('User permission: ${settings.authorizationStatus}');
+  // }
+  //
+  // Future<void> getToken() async {
+  //   String? token = await FirebaseMessaging.instance.getToken();
+  //   print("FCM Token: $token");
+  // }
+  // Future<void> subscribeToTopic() async {
+  //   await FirebaseMessaging.instance.subscribeToTopic("all_users");
+  //   print("User all_users topic ga qo'shildi");
+  // }
+  //
+  // Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  //   print("Background message: ${message.messageId}");
+  // }
 
 
 
@@ -131,10 +130,8 @@ class HomePageController extends GetxController with GetTickerProviderStateMixin
     )!;
 
     if (!data.status) {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        tutorialCoachMark.show(context: context);
-      });
-
+      await Future.delayed(Duration.zero);
+      tutorialCoachMark.show(context: context);
       await box.put('drawer', DrawerOpenKey(status: true));
     }
   }

@@ -5,12 +5,19 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:tap/languages/app_localizations.dart';
 
 import '../../../constands/appcolors.dart';
+import '../../../widgets/dialogs/map_information.dart';
+import '../../../widgets/dialogs/show_notice_dialog.dart';
 
 class LogsAndMap extends StatefulWidget {
   final List<Map<String, dynamic>> logsByDateList;
+  final double expectedLat;
+  final double expectedLon;
+
 
   const LogsAndMap({
     super.key,
+    required this.expectedLat,
+    required this.expectedLon,
     required this.logsByDateList,
   });
 
@@ -22,18 +29,51 @@ class _LogsAndMapState extends State<LogsAndMap> {
   String? selectedDate;
   List<Map<String, dynamic>> selectedLogs = [];
   Set<Marker> markers = {};
+  Set<Circle> circles = {};
+  BitmapDescriptor? buildingIcon;
 
   @override
   void initState() {
     super.initState();
 
+    // if (widget.logsByDateList.isNotEmpty) {
+    //   selectedDate = widget.logsByDateList.first["date"];
+    // }
+
+    final today = DateTime.now();
+    final todayStr = "${today.year.toString().padLeft(4,'0')}-"
+        "${today.month.toString().padLeft(2,'0')}-"
+        "${today.day.toString().padLeft(2,'0')}";
+
     if (widget.logsByDateList.isNotEmpty) {
-      selectedDate = widget.logsByDateList.first["date"];
+      final todayExists = widget.logsByDateList.any((e) => e["date"] == todayStr);
+      selectedDate = todayExists ? todayStr : widget.logsByDateList.first["date"];
+    }
+
+    loadMarker();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    if (selectedDate != null) {
       _loadLogsByDate(selectedDate!);
     }
+
+  }
+
+  Future<void> loadMarker() async {
+    buildingIcon = await BitmapDescriptor.fromAssetImage(
+      const ImageConfiguration(size: Size(48, 48)),
+      'assets/icons/school.png',
+    );
+    setState(() {});
   }
 
   void _loadLogsByDate(String date) {
+    final local = AppLocalizations.of(context)!;
+
     final dayData = widget.logsByDateList.firstWhere(
           (e) => e["date"] == date,
       orElse: () => {"logs": []},
@@ -41,23 +81,72 @@ class _LogsAndMapState extends State<LogsAndMap> {
 
     final logs = List<Map<String, dynamic>>.from(dayData["logs"] ?? []);
 
-    final newMarkers = logs.map((log) {
+    final logMarkers = logs.map((log) {
       return Marker(
         markerId: MarkerId(log["dateTime"].toString()),
-        position: LatLng(log["latitude"], log["longitude"]),
+        position: LatLng(
+          (log["latitude"] as num).toDouble(),
+          (log["longitude"] as num).toDouble(),
+        ),
         infoWindow: InfoWindow(
-          title: log["action"],
-          snippet: log["dateTime"],
+          title: log["action"]?.toString() == "CHECK_IN"
+              ? local.toComeText
+              : local.toGoText,
+          snippet:
+          "${((log["distance"] ?? 0) as num).toDouble().toStringAsFixed(1)} m",
         ),
       );
     }).toSet();
 
+    final buildingMarker = Marker(
+      markerId: const MarkerId("expected_location"),
+      position: LatLng(widget.expectedLat, widget.expectedLon),
+      icon:BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueBlue),
+      infoWindow:  InfoWindow(
+        title: AppLocalizations.of(context)!.buildingMarkerTitle ,
+      ),
+    );
+
+    final buildingCircle = Circle(
+      circleId: const CircleId("expected_location_radius"),
+      center: LatLng(widget.expectedLat, widget.expectedLon),
+      radius: 150, // metr
+      strokeColor: AppColors.appActiveBlue,
+      strokeWidth: 2,
+    );
+
+    // final checkInMarker = Marker(
+    //   markerId: const MarkerId("expected_location"),
+    //   position: LatLng(double.parse(dayData["checkInLat"]),double.parse(dayData["checkInLon"])),
+    //   icon: BitmapDescriptor.defaultMarkerWithHue(
+    //     BitmapDescriptor.hueGreen,
+    //   ),
+    //   infoWindow: const InfoWindow(
+    //     title: "Amaliyot binosi",
+    //   ),
+    // );
+    //
+    // final checkOutMarker = Marker(
+    //   markerId: const MarkerId("expected_location"),
+    //   position: LatLng(double.parse(dayData["checkOutLat"]),double.parse(dayData["checkOutLon"])),
+    //   icon: BitmapDescriptor.defaultMarkerWithHue(
+    //     BitmapDescriptor.hueGreen,
+    //   ),
+    //   infoWindow: const InfoWindow(
+    //     title: "Amaliyot binosi",
+    //   ),
+    // );
+
     setState(() {
       selectedDate = date;
       selectedLogs = logs;
-      markers = newMarkers;
+      // markers = {...logMarkers, buildingMarker,checkInMarker,checkOutMarker};
+      markers = {...logMarkers, buildingMarker};
+      circles = {buildingCircle};
     });
   }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -76,10 +165,22 @@ class _LogsAndMapState extends State<LogsAndMap> {
             fontFamily: GoogleFonts.lato().fontFamily,
           ),
         ),
+
         leading: IconButton(
           onPressed: () => Get.back(),
           icon: Icon(Icons.arrow_back_outlined, color: AppColors.white),
         ),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.info_outline),
+            color: AppColors.white,
+            iconSize: 30,
+            onPressed: (){
+              showMapInformation(context);
+            },
+          ),
+          SizedBox(width: 5,),
+        ],
       ),
       body: Column(
         children: [
@@ -123,12 +224,11 @@ class _LogsAndMapState extends State<LogsAndMap> {
             flex: 2,
             child: GoogleMap(
               initialCameraPosition: CameraPosition(
-                target: markers.isNotEmpty
-                    ? markers.first.position
-                    : const LatLng(41.2995, 69.2401),
+                target: LatLng(widget.expectedLat, widget.expectedLon),
                 zoom: 14,
               ),
               markers: markers,
+              circles: circles,
             ),
           ),
 
@@ -143,7 +243,7 @@ class _LogsAndMapState extends State<LogsAndMap> {
 
                 return ListTile(
                   leading: Icon(Icons.location_on, color: AppColors.red),
-                  title: Text(log["action"]),
+                  title: Text(log["action"]?.toString() == "CHECK_IN" ? AppLocalizations.of(context)!.toComeText : AppLocalizations.of(context)!.toGoText),
                   subtitle: Row(
                     children: [
                       Text(log["dateTime"].split("T")[0] ?? ""),

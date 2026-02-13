@@ -223,4 +223,80 @@ class AppLocalizationsRu extends AppLocalizations {
   @override
   String get notWorking =>
       'Эта функция не работает. Она находится в процессе создания';
+
+  @override
+  String get pageNotTitle => 'Эта страница в данный момент недоступна';
+
+  @override
+  String get pageNotDes =>
+      'Ведутся технические работы.\nПожалуйста, попробуйте позже.';
+
+  @override
+  String get noTime => 'Потерянные часы еще не подсчитаны';
+
+  @override
+  String get noticeTitle => 'Важная информация';
+
+  @override
+  String get noticeText1 =>
+      'Для корректной работы этого приложения мы можем запросить доступ к определенным разрешениям. Внимательно ознакомьтесь с информацией ниже.';
+
+  @override
+  String get noticeText2 => '• Разрешение на определение местоположения';
+
+  @override
+  String get noticeText3 =>
+      'Приложение может запросить доступ к вашему местоположению для предоставления более качественных услуг и функций.\nВаши данные о местоположении используются только внутри приложения и не передаются третьим лицам.';
+
+  @override
+  String get noticeText4 => '• Разрешение на отправку уведомлений';
+
+  @override
+  String get noticeText5 =>
+      'Приложение может отправлять уведомления, чтобы информировать вас о важных обновлениях и напоминаниях.';
+
+  @override
+  String get noticeText6 => 'Конфиденциальность и использование данных';
+
+  @override
+  String get noticeText7 =>
+      'Приложение собирает только минимально необходимые для своей работы данные.\nВсе данные хранятся в безопасности и не продаются и не передаются третьим лицам.';
+
+  @override
+  String get noticeGetIt => 'Я понимаю';
+
+  @override
+  String get buildingMarkerTitle => 'Практическое строительство';
+
+  @override
+  String get iTitle => 'Описание персонажа';
+
+  @override
+  String get iDate => 'Дата';
+
+  @override
+  String get iDateDesc => 'Сегодняшняя дата или выбранная дата';
+
+  @override
+  String get iPoint => 'Точка операции';
+
+  @override
+  String get iPointDesc => 'Указанная точка — это здание для тренировок';
+
+  @override
+  String get iWrongLoc => 'Неверное местоположение';
+
+  @override
+  String get iWrongLocDesc =>
+      'Точка, где вы неоднократно пытались выйти за пределы указанной зоны';
+
+  @override
+  String get iCircle => 'Граница';
+
+  @override
+  String get iCircleDesc => 'Граница здания для тренировок';
+
+  @override
+  String get iEnd =>
+      'Обратите внимание, что если информация не отображается и карта Google пуста, пожалуйста, выберите базу для тренировок на главной странице!';
 }

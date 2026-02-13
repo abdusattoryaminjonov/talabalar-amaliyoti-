@@ -37,6 +37,7 @@ class DashboardPageController extends GetxController{
   String todayDate = '';
   String inTime = "";
   String outTime = "";
+  List<double> dayTimeNumbers = [];
 
   String getFirstName(String? fullName) {
     if (fullName == null || fullName.trim().isEmpty) return 'Student';
@@ -71,6 +72,52 @@ class DashboardPageController extends GetxController{
     update();
 
   }
+
+  Future<void> loadAttendances(int interId, String token) async {
+    try {
+      final res = await httpService.getAttendance(token, interId);
+
+      if (res.statusCode != 200) {
+        dayTimeNumbers = [];
+        update();
+        return;
+      }
+
+      final json = jsonDecode(res.body);
+
+      final attendances =
+      json["data"]?["studentSchedule"]?["attendances"];
+
+      if (attendances == null || attendances is! List) {
+        dayTimeNumbers = [];
+        update();
+
+        return;
+      }
+
+      List<double> tempList = [];
+
+      for (var item in attendances) {
+        final lostHours = item["lostHours"];
+
+        if (lostHours is num) {
+          tempList.add(lostHours.toDouble());
+        }
+      }
+
+      dayTimeNumbers = tempList;
+      update();
+
+
+      LogService.d("lostHours list: $dayTimeNumbers");
+    } catch (e) {
+      dayTimeNumbers = [];
+      update();
+
+      LogService.e("Xatolik: $e");
+    }
+  }
+
 
 
   Widget chosenInternship(BuildContext context){
@@ -468,7 +515,16 @@ class DashboardPageController extends GetxController{
               )
             ],
           ),
-          ChartWidgetCard(
+          dayTimeNumbers.isEmpty ? Center(
+            child: Text(
+              AppLocalizations.of(context)!.noTime,
+              style: TextStyle(
+                fontSize: 25,
+                color: AppColors.appActiveBlue,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ) : ChartWidgetCard(
             chartData: dayTimeNumbers,
           ),
           SizedBox(height: 10,),

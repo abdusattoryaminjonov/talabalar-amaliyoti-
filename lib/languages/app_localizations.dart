@@ -525,6 +525,144 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'This feature is not working. It is being created.'**
   String get notWorking;
+
+  /// No description provided for @pageNotTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'This page is currently unavailable'**
+  String get pageNotTitle;
+
+  /// No description provided for @pageNotDes.
+  ///
+  /// In en, this message translates to:
+  /// **'Technical work is underway.\nPlease try again later.'**
+  String get pageNotDes;
+
+  /// No description provided for @noTime.
+  ///
+  /// In en, this message translates to:
+  /// **'Lost hours not yet calculated'**
+  String get noTime;
+
+  /// No description provided for @noticeTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Important Information'**
+  String get noticeTitle;
+
+  /// No description provided for @noticeText1.
+  ///
+  /// In en, this message translates to:
+  /// **'To use this application properly, we may request access to certain permissions. Please read the information below carefully.'**
+  String get noticeText1;
+
+  /// No description provided for @noticeText2.
+  ///
+  /// In en, this message translates to:
+  /// **'• Location Permission'**
+  String get noticeText2;
+
+  /// No description provided for @noticeText3.
+  ///
+  /// In en, this message translates to:
+  /// **'The application may request access to your location to provide better services and features.\nYour location data is used only within the application and is not shared with third parties.'**
+  String get noticeText3;
+
+  /// No description provided for @noticeText4.
+  ///
+  /// In en, this message translates to:
+  /// **'• Notification Permission'**
+  String get noticeText4;
+
+  /// No description provided for @noticeText5.
+  ///
+  /// In en, this message translates to:
+  /// **'The application may send notifications to inform you about important updates and reminders.'**
+  String get noticeText5;
+
+  /// No description provided for @noticeText6.
+  ///
+  /// In en, this message translates to:
+  /// **'Privacy and Data Usage'**
+  String get noticeText6;
+
+  /// No description provided for @noticeText7.
+  ///
+  /// In en, this message translates to:
+  /// **'The application collects only the minimum data required for its functionality.\nAll data is stored securely and is not sold or shared with third parties.'**
+  String get noticeText7;
+
+  /// No description provided for @noticeGetIt.
+  ///
+  /// In en, this message translates to:
+  /// **'I Understand'**
+  String get noticeGetIt;
+
+  /// No description provided for @buildingMarkerTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Internship Building'**
+  String get buildingMarkerTitle;
+
+  /// No description provided for @iTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Character Description'**
+  String get iTitle;
+
+  /// No description provided for @iDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Date'**
+  String get iDate;
+
+  /// No description provided for @iDateDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Today\'s date, or selected date'**
+  String get iDateDesc;
+
+  /// No description provided for @iPoint.
+  ///
+  /// In en, this message translates to:
+  /// **'Operation point'**
+  String get iPoint;
+
+  /// No description provided for @iPointDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'The designated point is the practice building'**
+  String get iPointDesc;
+
+  /// No description provided for @iWrongLoc.
+  ///
+  /// In en, this message translates to:
+  /// **'Wrong location'**
+  String get iWrongLoc;
+
+  /// No description provided for @iWrongLocDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'The point where you tried to go outside the designated area repeatedly'**
+  String get iWrongLocDesc;
+
+  /// No description provided for @iCircle.
+  ///
+  /// In en, this message translates to:
+  /// **'Boundary'**
+  String get iCircle;
+
+  /// No description provided for @iCircleDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'The boundary of the practice building'**
+  String get iCircleDesc;
+
+  /// No description provided for @iEnd.
+  ///
+  /// In en, this message translates to:
+  /// **'Please note that if no information is displayed and the google map is empty, please select the practice base on the home page!'**
+  String get iEnd;
 }
 
 class _AppLocalizationsDelegate

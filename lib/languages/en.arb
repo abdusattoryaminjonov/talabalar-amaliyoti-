@@ -91,5 +91,30 @@
   "submitText" : "Submit",
 
   "submitMainIdeTxt": "By clicking the \"SUBMIT\" button, the arrival/departure attendance of the internship location will be sent.",
-  "notWorking": "This feature is not working. It is being created."
+  "notWorking": "This feature is not working. It is being created.",
+  "pageNotTitle" : "This page is currently unavailable",
+  "pageNotDes" : "Technical work is underway.\nPlease try again later.",
+  "noTime" : "Lost hours not yet calculated",
+
+  "noticeTitle" : "Important Information",
+  "noticeText1" : "To use this application properly, we may request access to certain permissions. Please read the information below carefully.",
+  "noticeText2" : "• Location Permission",
+  "noticeText3" : "The application may request access to your location to provide better services and features.\nYour location data is used only within the application and is not shared with third parties.",
+  "noticeText4" : "• Notification Permission",
+  "noticeText5" : "The application may send notifications to inform you about important updates and reminders.",
+  "noticeText6" : "Privacy and Data Usage",
+  "noticeText7" : "The application collects only the minimum data required for its functionality.\nAll data is stored securely and is not sold or shared with third parties.",
+  "noticeGetIt" : "I Understand",
+
+  "buildingMarkerTitle" : "Internship Building",
+  "iTitle" : "Character Description",
+  "iDate" : "Date",
+  "iDateDesc" : "Today's date, or selected date",
+  "iPoint" : "Operation point",
+  "iPointDesc" : "The designated point is the practice building",
+  "iWrongLoc" : "Wrong location",
+  "iWrongLocDesc": "The point where you tried to go outside the designated area repeatedly",
+  "iCircle": "Boundary",
+  "iCircleDesc": "The boundary of the practice building",
+  "iEnd" : "Please note that if no information is displayed and the google map is empty, please select the practice base on the home page!"
 }

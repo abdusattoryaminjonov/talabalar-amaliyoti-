@@ -6,6 +6,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive/hive.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 import '../../constands/appcolors.dart';
 import '../../languages/app_localizations.dart';
 import '../../models/login_users_model/internship_model.dart';
@@ -22,8 +23,15 @@ class AttendancePageController extends GetxController {
 
   late Box<InternshipModel> internshipBox;
   final httpService = HttpService();
+  final RefreshController refreshController = RefreshController();
 
   List<Map<String, dynamic>> logsByDateList = [];
+  String expectedLat = "41.27238966350865";
+  String expectedLon = "69.20522773343085";
+  String checkInLat = "";
+  String checkInLon = "";
+  String checkOutLat = "";
+  String checkOutLon = "";
 
   DateTime? kirishVaqti;
   String interName = "";
@@ -84,6 +92,7 @@ class AttendancePageController extends GetxController {
     try {
       final res = await httpService.getAttendance(token, interId);
 
+
       if (res.statusCode != 200) {
         attendancesMap.clear();
         logsByDateList.clear();
@@ -93,6 +102,8 @@ class AttendancePageController extends GetxController {
       }
 
       final json = jsonDecode(res.body);
+      
+      LogService.w(json.toString());
 
       final attendances =
           json["data"]?["studentSchedule"]?["attendances"] ?? [];
@@ -101,15 +112,35 @@ class AttendancePageController extends GetxController {
       logsByDateList.clear();
 
       for (var item in attendances) {
+
         final dateStr = item["date"];
         attendancesMap[dateStr] = item;
 
         if (dateStr == null || dateStr.isEmpty) continue;
 
+        expectedLat = item["expectedLat"].toString();
+        expectedLon = item["expectedLon"].toString();
+
+        final isInput = item["isInput"];
+        final isOutput = item["isOutput"];
+
+        if(isInput){
+          checkInLat = item["checkInLat"].toString();
+          checkInLon = item["checkInLon"].toString();
+        }
+
+        if(isOutput){
+          checkOutLat = item["checkOutLat"].toString();
+          checkOutLon = item["checkOutLon"].toString();
+        }
         final logs = item["logs"] ?? [];
 
         logsByDateList.add({
           "date": dateStr,
+          "checkInLat": checkInLat,
+          "checkInLon": checkInLon,
+          "checkOutLat": checkOutLat,
+          "checkOutLon": checkOutLon,
           "logs": logs,
         });
       }
@@ -207,8 +238,12 @@ class AttendancePageController extends GetxController {
                           var request = await httpService.attendance(
                             token: token,
                             internshipId: id,
-                            lat: lat,
-                            lng: lng,
+                            // lat: lat,
+                            // lng: lng,
+
+                            lat: "41.271973761911",
+                            lng: "69.20197200072812",
+
                             notes: finalNote,
                             buttonType: 'CHECK_OUT',
                           );
@@ -294,8 +329,10 @@ class AttendancePageController extends GetxController {
                           var response = await httpService.attendance(
                             token: token,
                             internshipId: id,
-                            lat: lat,
-                            lng: lng,
+                            // lat: lat,
+                            // lng: lng,
+                            lat: "41.271973761911",
+                            lng: "69.20197200072812",
                             notes: finalNote,
                             buttonType: 'CHECK_IN',
                           );
@@ -495,25 +532,7 @@ class AttendancePageController extends GetxController {
                   ),
                   const SizedBox(height: 16),
 
-                  StreamBuilder<DateTime>(
-                    stream: Stream.periodic(const Duration(seconds: 1), (_) => DateTime.now()),
-                    builder: (context, snapshot) {
-                      final now = snapshot.data ?? DateTime.now();
-                      final time = "${now.hour.toString().padLeft(2, '0')}:${now.minute.toString().padLeft(2, '0')}:${now.second.toString().padLeft(2, '0')}";
 
-                      return Text(
-                        time,
-                        style: TextStyle(
-                          fontSize: 26,
-                          fontWeight: FontWeight.w600,
-                          color: AppColors.appActiveBlue,
-                        ),
-                        textAlign: TextAlign.center,
-                      );
-                    },
-                  ),
-
-                  const SizedBox(height: 10),
                   Text(
                     !isCheckIn ? AppLocalizations.of(context)!.comIn : AppLocalizations.of(context)!.comOut,
                     style: const TextStyle(

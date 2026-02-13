@@ -7,6 +7,7 @@ import '../../../constands/appcolors.dart';
 import '../../../controllers/student_controllers/task_page_controller.dart';
 import '../../../languages/app_localizations.dart';
 import '../../../models/login_users_model/internship_model.dart';
+import '../../page_not/page_not_available.dart';
 
 class TasksPage extends StatefulWidget {
   final String interName;
@@ -52,7 +53,8 @@ class _TasksPageState extends State<TasksPage> {
                 ),
               ),
             ),
-            body: controller.bodyTask(context,taskPageController.interName,widget.interId),
+            // body: controller.bodyTask(context,taskPageController.interName,widget.interId),
+          body: PageNotAvailableWidget(),
         );
       },
     );
