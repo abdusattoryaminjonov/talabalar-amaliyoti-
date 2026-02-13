@@ -92,6 +92,19 @@
   "submitText" : "Yuborish",
   "submitMainIdeTxt": "\"YUBORISH\" tugmasini bosangiz amaliyot o'tash joyining kelish/ketish davomati jo'natiladi.",
 
-  "notWorking": "Bu funksiya ishlamaydi. Yaratish jarayonida"
+  "notWorking": "Bu funksiya ishlamaydi. Yaratish jarayonida",
+  "pageNotTitle" : "Bu sahifa hozirda ishlamaydi",
+  "pageNotDes" : "Texnik ishlar olib borilmoqda.\nIltimos, keyinroq qayta urinib ko‘ring.",
+  "noTime" : "Yoqotilgan soatlar hali hisoblanmagan",
+
+  "noticeTitle" : "Muhim ma'lumot",
+  "noticeText1" : "Ushbu ilovadan to'g'ri foydalanish uchun biz ma'lum ruxsatnomalarga kirishni so'rashimiz mumkin. Iltimos, quyidagi ma'lumotlarni diqqat bilan o'qing.",
+  "noticeText2" : "• Joylashuvga ruxsat",
+  "noticeText3" : "Ilova yaxshiroq xizmatlar va funksiyalarni taqdim etish uchun sizning joylashuvingizga kirishni so'rashi mumkin.\nSizning joylashuv ma'lumotlaringiz faqat ilova ichida ishlatiladi va uchinchi tomonlar bilan ulashilmaydi.",
+  "noticeText4" : "• Bildirishnoma ruxsati",
+  "noticeText5" : "Ilova sizni muhim yangilanishlar va eslatmalar haqida xabardor qilish uchun bildirishnomalar yuborishi mumkin.",
+  "noticeText6" : "Maxfiylik va ma'lumotlardan foydalanish",
+  "noticeText7" : "Ilova faqat uning ishlashi uchun zarur bo'lgan minimal ma'lumotlarni to'playdi.\nBarcha ma'lumotlar xavfsiz saqlanadi va uchinchi tomonlar bilan sotilmaydi yoki ulashilmaydi.",
+  "noticeGetIt" : "Tushundim"
 
 }

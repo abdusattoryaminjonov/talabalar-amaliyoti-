@@ -37,7 +37,6 @@ const  List<dynamic> demoTasks  = [
   },
 ];
 
-const List<double> dayTimeNumbers = [240, 133, 154, 143, 240,240, 133, 154, 143, 240,240, 133, 154, 143, 240,240, 133, 154, 143, 240,240, 133, 154, 143, 240,240, 133, 154, 143, 240];
 
 final Map<String, Map<String, dynamic>> tasks = {
   "1": {

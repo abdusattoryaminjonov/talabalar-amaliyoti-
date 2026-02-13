@@ -221,4 +221,45 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get notWorking => 'This feature is not working. It is being created.';
+
+  @override
+  String get pageNotTitle => 'This page is currently unavailable';
+
+  @override
+  String get pageNotDes =>
+      'Technical work is underway.\nPlease try again later.';
+
+  @override
+  String get noTime => 'Lost hours not yet calculated';
+
+  @override
+  String get noticeTitle => 'Important Information';
+
+  @override
+  String get noticeText1 =>
+      'To use this application properly, we may request access to certain permissions. Please read the information below carefully.';
+
+  @override
+  String get noticeText2 => '• Location Permission';
+
+  @override
+  String get noticeText3 =>
+      'The application may request access to your location to provide better services and features.\nYour location data is used only within the application and is not shared with third parties.';
+
+  @override
+  String get noticeText4 => '• Notification Permission';
+
+  @override
+  String get noticeText5 =>
+      'The application may send notifications to inform you about important updates and reminders.';
+
+  @override
+  String get noticeText6 => 'Privacy and Data Usage';
+
+  @override
+  String get noticeText7 =>
+      'The application collects only the minimum data required for its functionality.\nAll data is stored securely and is not sold or shared with third parties.';
+
+  @override
+  String get noticeGetIt => 'I Understand';
 }

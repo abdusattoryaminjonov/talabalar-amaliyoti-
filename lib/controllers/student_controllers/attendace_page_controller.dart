@@ -84,6 +84,8 @@ class AttendancePageController extends GetxController {
     try {
       final res = await httpService.getAttendance(token, interId);
 
+      LogService.d(res.body.toString());
+
       if (res.statusCode != 200) {
         attendancesMap.clear();
         logsByDateList.clear();
@@ -495,25 +497,7 @@ class AttendancePageController extends GetxController {
                   ),
                   const SizedBox(height: 16),
 
-                  StreamBuilder<DateTime>(
-                    stream: Stream.periodic(const Duration(seconds: 1), (_) => DateTime.now()),
-                    builder: (context, snapshot) {
-                      final now = snapshot.data ?? DateTime.now();
-                      final time = "${now.hour.toString().padLeft(2, '0')}:${now.minute.toString().padLeft(2, '0')}:${now.second.toString().padLeft(2, '0')}";
 
-                      return Text(
-                        time,
-                        style: TextStyle(
-                          fontSize: 26,
-                          fontWeight: FontWeight.w600,
-                          color: AppColors.appActiveBlue,
-                        ),
-                        textAlign: TextAlign.center,
-                      );
-                    },
-                  ),
-
-                  const SizedBox(height: 10),
                   Text(
                     !isCheckIn ? AppLocalizations.of(context)!.comIn : AppLocalizations.of(context)!.comOut,
                     style: const TextStyle(

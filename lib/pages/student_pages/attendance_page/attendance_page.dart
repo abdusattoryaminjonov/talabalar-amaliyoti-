@@ -170,6 +170,7 @@ class _AttendancePageState extends State<AttendancePage> {
                 ),
               )
                   : controller.buildDayInfo(controller.selectedDay!,context,NoSqlService.getLogin()!.accessToken,controller.interId),
+              const SizedBox(height: 80),
             ],
           ),
         );

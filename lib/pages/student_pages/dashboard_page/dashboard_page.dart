@@ -1,3 +1,4 @@
+import 'package:animated_snack_bar/animated_snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -7,11 +8,13 @@ import '../../../constands/appcolors.dart';
 import '../../../constands/demo_data.dart';
 import '../../../controllers/home_page_controller.dart';
 import '../../../controllers/student_controllers/dashboard_page_controller.dart';
+import '../../../languages/app_localizations.dart';
 import '../../../models/login_users_model/internship_model.dart';
 import '../../../models/login_users_model/nosql_login.dart';
 import '../../../models/login_users_model/student_model.dart';
 import '../../../services/nosql_service.dart';
 import '../../../widgets/clip_wawe_tolqin.dart';
+import '../../../widgets/show_message/show_message.dart';
 import 'carousel_widget.dart';
 
 class DashboardPage extends StatefulWidget {
@@ -39,10 +42,12 @@ class _DashboardPageState extends State<DashboardPage> {
     dashboardController.internshipModel =
         dashboardController.internshipBox.get("current_internship");
 
+
     dashboardController.interName =
         dashboardController.internshipModel?.name ?? "Amaliyot tanlanmagan!";
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
+      dashboardController.loadAttendances(dashboardController.internshipModel?.id ?? 1, NoSqlService.getLogin()!.accessToken);
       dashboardController.loadDateTime(
         dashboardController.internshipModel?.id ?? 1,
         NoSqlService.getLogin()!.accessToken,
@@ -92,8 +97,11 @@ class _DashboardPageState extends State<DashboardPage> {
             actions: [
               IconButton(
                 onPressed: (){
-                  dashboardController.goToRatingPage(context);
+                  ShowMessage.showMessage(context,AppLocalizations.of(context)!.notWorking, AnimatedSnackBarType.info);
                 },
+                // dashboardController.goToRatingPage(context);
+
+
                 icon: Icon(Icons.star_border),
                 color: Colors.white,
                 iconSize: 30,
@@ -106,8 +114,11 @@ class _DashboardPageState extends State<DashboardPage> {
                   children: [
                     IconButton(
                       onPressed: () {
-                        dashboardController.goToNotificationPage(context);
+                        ShowMessage.showMessage(context,AppLocalizations.of(context)!.notWorking, AnimatedSnackBarType.info);
                       },
+
+                      // dashboardController.goToNotificationPage(context);
+
                       icon: const Icon(
                         Icons.notifications,
                         color: Colors.white,

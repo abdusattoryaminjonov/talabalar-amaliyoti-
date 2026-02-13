@@ -222,4 +222,45 @@ class AppLocalizationsUz extends AppLocalizations {
 
   @override
   String get notWorking => 'Bu funksiya ishlamaydi. Yaratish jarayonida';
+
+  @override
+  String get pageNotTitle => 'Bu sahifa hozirda ishlamaydi';
+
+  @override
+  String get pageNotDes =>
+      'Texnik ishlar olib borilmoqda.\nIltimos, keyinroq qayta urinib ko‘ring.';
+
+  @override
+  String get noTime => 'Yoqotilgan soatlar hali hisoblanmagan';
+
+  @override
+  String get noticeTitle => 'Muhim ma\'lumot';
+
+  @override
+  String get noticeText1 =>
+      'Ushbu ilovadan to\'g\'ri foydalanish uchun biz ma\'lum ruxsatnomalarga kirishni so\'rashimiz mumkin. Iltimos, quyidagi ma\'lumotlarni diqqat bilan o\'qing.';
+
+  @override
+  String get noticeText2 => '• Joylashuvga ruxsat';
+
+  @override
+  String get noticeText3 =>
+      'Ilova yaxshiroq xizmatlar va funksiyalarni taqdim etish uchun sizning joylashuvingizga kirishni so\'rashi mumkin.\nSizning joylashuv ma\'lumotlaringiz faqat ilova ichida ishlatiladi va uchinchi tomonlar bilan ulashilmaydi.';
+
+  @override
+  String get noticeText4 => '• Bildirishnoma ruxsati';
+
+  @override
+  String get noticeText5 =>
+      'Ilova sizni muhim yangilanishlar va eslatmalar haqida xabardor qilish uchun bildirishnomalar yuborishi mumkin.';
+
+  @override
+  String get noticeText6 => 'Maxfiylik va ma\'lumotlardan foydalanish';
+
+  @override
+  String get noticeText7 =>
+      'Ilova faqat uning ishlashi uchun zarur bo\'lgan minimal ma\'lumotlarni to\'playdi.\nBarcha ma\'lumotlar xavfsiz saqlanadi va uchinchi tomonlar bilan sotilmaydi yoki ulashilmaydi.';
+
+  @override
+  String get noticeGetIt => 'Tushundim';
 }
