@@ -6,7 +6,6 @@ import 'package:tap/languages/app_localizations.dart';
 
 import '../../../constands/appcolors.dart';
 import '../../../widgets/dialogs/map_information.dart';
-import '../../../widgets/dialogs/show_notice_dialog.dart';
 
 class LogsAndMap extends StatefulWidget {
   final List<Map<String, dynamic>> logsByDateList;
@@ -110,7 +109,7 @@ class _LogsAndMapState extends State<LogsAndMap> {
     final buildingCircle = Circle(
       circleId: const CircleId("expected_location_radius"),
       center: LatLng(widget.expectedLat, widget.expectedLon),
-      radius: 150, // metr
+      radius: 100,
       strokeColor: AppColors.appActiveBlue,
       strokeWidth: 2,
     );

@@ -52,7 +52,8 @@ class AppLocalizationsRu extends AppLocalizations {
       'Пользовательские данные устарели. Пожалуйста, войдите в систему снова.';
 
   @override
-  String get unknownError => 'Неизвестная ошибка';
+  String get unknownError =>
+      'Неизвестная ошибка.\n Проверьте сеть, повторно войдите в приложение';
 
   @override
   String get connectionTimeout => 'Не удалось подключиться к Интернету';

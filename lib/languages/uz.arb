@@ -17,7 +17,7 @@
   "notStudent": "Siz TALABA emassiz",
 
   "dataIsOutdated": "Foydalanuvchi ma'lumotlari eskirgan. Iltimos ilovaga qaytadan kiring.",
-  "unknownError": "Nomaʼlum xatolik",
+  "unknownError": "Nomaʼlum xatolik.\n Intranetni tekshiring, ilovaga qaytadan kiring",
   "connectionTimeout": "Internet bilan bogʻlanib bo‘lmadi",
 
   "logsAndMap": "Urinishlar",

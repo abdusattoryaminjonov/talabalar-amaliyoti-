@@ -6,7 +6,7 @@ class ShowMessage {
     AnimatedSnackBar.material(
         message,
         type: type,
-        duration: const Duration(seconds: 2)
+        duration: const Duration(seconds: 3)
     ).show(context);
   }
 }

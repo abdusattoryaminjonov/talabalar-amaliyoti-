@@ -51,7 +51,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get dataIsOutdated => 'User data is out of date. Please log in again.';
 
   @override
-  String get unknownError => 'Unknown error';
+  String get unknownError =>
+      'Unknown error.\n Check the intranet, re-enter the application';
 
   @override
   String get connectionTimeout => 'Unable to connect to the Internet';

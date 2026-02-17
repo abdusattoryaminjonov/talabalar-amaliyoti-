@@ -14,6 +14,7 @@ import '../../../models/login_users_model/nosql_login.dart';
 import '../../../models/login_users_model/student_model.dart';
 import '../../../services/nosql_service.dart';
 import '../../../widgets/clip_wawe_tolqin.dart';
+import '../../../widgets/intranet_banner/intranet_banner.dart';
 import '../../../widgets/show_message/show_message.dart';
 import 'carousel_widget.dart';
 

@@ -52,7 +52,8 @@ class AppLocalizationsUz extends AppLocalizations {
       'Foydalanuvchi ma\'lumotlari eskirgan. Iltimos ilovaga qaytadan kiring.';
 
   @override
-  String get unknownError => 'Nomaʼlum xatolik';
+  String get unknownError =>
+      'Nomaʼlum xatolik.\n Intranetni tekshiring, ilovaga qaytadan kiring';
 
   @override
   String get connectionTimeout => 'Internet bilan bogʻlanib bo‘lmadi';

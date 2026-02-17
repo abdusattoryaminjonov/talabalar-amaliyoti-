@@ -187,7 +187,7 @@ abstract class AppLocalizations {
   /// No description provided for @unknownError.
   ///
   /// In en, this message translates to:
-  /// **'Unknown error'**
+  /// **'Unknown error.\n Check the intranet, re-enter the application'**
   String get unknownError;
 
   /// No description provided for @connectionTimeout.

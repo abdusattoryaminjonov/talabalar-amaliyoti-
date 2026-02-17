@@ -118,7 +118,13 @@ class _AttendancePageState extends State<AttendancePage> {
               );
               controller.refreshController.refreshCompleted();
             },
-            child: ListView(
+            child: controller.isPageLoading ?
+            Center(
+                child: SizedBox(
+                  width: 150,
+                  child: Lottie.asset("assets/lotties/loading1.json"),
+                )
+            ) : ListView(
               children: [
                 const SizedBox(height: 10),
                 controller.chosenInternship(context, controller.interName),

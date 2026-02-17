@@ -46,6 +46,7 @@ class AttendancePageController extends GetxController {
   String lng = '';
 
 
+
   void showMessage(BuildContext context, String message, AnimatedSnackBarType type) {
     AnimatedSnackBar.material(
         message,
@@ -54,18 +55,76 @@ class AttendancePageController extends GetxController {
     ).show(context);
   }
 
-  Future<void> checkLocationPermission(BuildContext context) async {
+  // Future<bool> checkLocationPermission(BuildContext context) async {
+  //   LocationPermission permission = await Geolocator.checkPermission();
+  //
+  //   if (permission == LocationPermission.denied) {
+  //     permission = await Geolocator.requestPermission();
+  //   }
+  //
+  //   if (permission == LocationPermission.deniedForever ||
+  //       permission == LocationPermission.denied) {
+  //     locationMessage = AppLocalizations.of(context)!.locationMessage;
+  //     update();
+  //     return false;
+  //   }
+  //
+  //   return true;
+  // }
+
+  // Future<bool> checkLocationPermission(BuildContext context) async {
+  //   bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
+  //
+  //   if (!serviceEnabled) {
+  //     await Geolocator.openLocationSettings();
+  //     return false;
+  //   }
+  //
+  //   LocationPermission permission = await Geolocator.checkPermission();
+  //
+  //   if (permission == LocationPermission.denied) {
+  //     permission = await Geolocator.requestPermission();
+  //   }
+  //
+  //   if (permission == LocationPermission.deniedForever) {
+  //     await Geolocator.openAppSettings();
+  //     return false;
+  //   }
+  //
+  //   if (permission == LocationPermission.denied) {
+  //     return false;
+  //   }
+  //
+  //   return true;
+  // }
+
+  Future<bool> checkLocationPermission(BuildContext context) async {
+    bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      locationMessage = AppLocalizations.of(context)!.locationMessage;
+      update();
+      return false;
+    }
+
     LocationPermission permission = await Geolocator.checkPermission();
+
     if (permission == LocationPermission.denied) {
       permission = await Geolocator.requestPermission();
-      if (permission == LocationPermission.deniedForever) {
-        locationMessage = AppLocalizations.of(context)!.locationMessage;
-        update();
-        return;
-      }
     }
-    _getCurrentLocation();
+
+    if (permission == LocationPermission.deniedForever) {
+      return false;
+    }
+
+    if (permission == LocationPermission.denied) {
+      return false;
+    }
+
+    return true;
   }
+
+
+
 
   Future<void> _getCurrentLocation() async {
     Position position = await Geolocator.getCurrentPosition(
@@ -115,6 +174,7 @@ class AttendancePageController extends GetxController {
 
         final dateStr = item["date"];
         attendancesMap[dateStr] = item;
+        update();
 
         if (dateStr == null || dateStr.isEmpty) continue;
 
@@ -143,6 +203,8 @@ class AttendancePageController extends GetxController {
           "checkOutLon": checkOutLon,
           "logs": logs,
         });
+        update();
+
       }
     } catch (e) {
       LogService.e("Xatolik: $e");
@@ -170,6 +232,8 @@ class AttendancePageController extends GetxController {
         "${day.year}-${day.month.toString().padLeft(2, '0')}-${day.day.toString().padLeft(2, '0')}";
 
     final data = attendancesMap[key];
+    update();
+
 
     if (data == null) {
       return Center(
@@ -212,8 +276,21 @@ class AttendancePageController extends GetxController {
                   width: MediaQuery.of(context).size.width * 0.42,
                   child: ElevatedButton.icon(
                     onPressed: () async {
-                      String? note = await showNoteDialog(context, isCheckIn: true);
+                      bool hasPermission = await checkLocationPermission(context);
 
+                      if (!hasPermission) {
+                        ShowDialogHelper.showCustomDialog(
+                          context,
+                          "Iltimos, lokatsiya ruxsatini yoqing",
+                          AppColors.red,
+                        );
+                        return;
+                      }
+
+                      // bool hasPermission = await checkLocationPermission(context);
+                      if (!hasPermission) return;
+
+                      String? note = await showNoteDialog(context, isCheckIn: true);
                       if (note == null) return;
 
                       String finalNote = note.isEmpty ? "Assalomu Aleykum" : note;
@@ -238,11 +315,12 @@ class AttendancePageController extends GetxController {
                           var request = await httpService.attendance(
                             token: token,
                             internshipId: id,
-                            // lat: lat,
-                            // lng: lng,
 
-                            lat: "41.271973761911",
-                            lng: "69.20197200072812",
+                            lat: lat,
+                            lng: lng,
+
+                            // lat: "41.271973761911",
+                            // lng: "69.20197200072812",
 
                             notes: finalNote,
                             buttonType: 'CHECK_OUT',
@@ -251,13 +329,15 @@ class AttendancePageController extends GetxController {
                           Map<String, dynamic> jsonResponse =
                           jsonDecode(request.body);
 
-                          if (request.statusCode == 200) {
+                          if (request.statusCode == 200 || request.statusCode == 201) {
                             ShowDialogHelper.showCustomDialog(
                               context,
                               jsonResponse['message'],
                               AppColors.appActiveGreen,
                             );
                             await loadData(id, token);
+                            update();
+
                           } else {
                             ShowDialogHelper.showCustomDialog(
                               context,
@@ -269,6 +349,7 @@ class AttendancePageController extends GetxController {
                           LogService.e(e.toString());
                         }
 
+                        await loadData(id, token);
                         isPageLoading = false;
                         update();
                       } else {
@@ -276,6 +357,8 @@ class AttendancePageController extends GetxController {
                           context,
                           AppLocalizations.of(context)!.lieLocation,
                         );
+
+                        await loadData(id, token);
                         isPageLoading = false;
                         update();
                       }
@@ -299,9 +382,20 @@ class AttendancePageController extends GetxController {
                   width: MediaQuery.of(context).size.width * 0.42,
                   child: ElevatedButton.icon(
                     onPressed: () async {
+                      bool hasPermission = await checkLocationPermission(context);
 
-                      String? note = await showNoteDialog(context, isCheckIn: false);
+                      if (!hasPermission) {
+                        ShowDialogHelper.showCustomDialog(
+                          context,
+                          "Iltimos, lokatsiya ruxsatini yoqing",
+                          AppColors.red,
+                        );
+                        return;
+                      }
+                      // bool hasPermission = await checkLocationPermission(context);
+                      if (!hasPermission) return;
 
+                      String? note = await showNoteDialog(context, isCheckIn: true);
                       if (note == null) return;
 
                       String finalNote = note.isEmpty ? "Assalomu Aleykum" : note;
@@ -329,10 +423,12 @@ class AttendancePageController extends GetxController {
                           var response = await httpService.attendance(
                             token: token,
                             internshipId: id,
-                            // lat: lat,
-                            // lng: lng,
-                            lat: "41.271973761911",
-                            lng: "69.20197200072812",
+
+                            lat: lat,
+                            lng: lng,
+
+                            // lat: "41.271973761911",
+                            // lng: "69.20197200072812",
                             notes: finalNote,
                             buttonType: 'CHECK_IN',
                           );
@@ -343,6 +439,8 @@ class AttendancePageController extends GetxController {
                           if (response.statusCode == 200 ||
                               response.statusCode == 201) {
                             await loadData(id, token);
+                            update();
+
                           } else {
                             ShowDialogHelper.showCustomDialog(
                               context,
@@ -358,6 +456,7 @@ class AttendancePageController extends GetxController {
                           );
                         }
 
+                        await loadData(id, token);
                         isPageLoading = false;
                         update();
                       } else {
@@ -365,6 +464,8 @@ class AttendancePageController extends GetxController {
                           context,
                           AppLocalizations.of(context)!.lieLocation,
                         );
+
+                        await loadData(id, token);
                         isPageLoading = false;
                         update();
                       }
@@ -500,9 +601,10 @@ class AttendancePageController extends GetxController {
       backgroundColor: Colors.transparent,
       builder: (context) {
         return DraggableScrollableSheet(
-          initialChildSize: 0.35,
-          minChildSize: 0.25,
-          maxChildSize: 0.6,
+          initialChildSize: 0.55,
+          minChildSize: 0.35,
+          maxChildSize: 0.9,
+
           builder: (context, scrollController) {
             return Container(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
