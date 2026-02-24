@@ -1,14 +1,12 @@
 import 'dart:convert';
 
 import 'package:animated_snack_bar/animated_snack_bar.dart';
-// import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive/hive.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
-import 'package:tap/widgets/dialogs/show_notice_dialog.dart';
 import 'package:tutorial_coach_mark/tutorial_coach_mark.dart';
 
 import '../constands/appcolors.dart';
@@ -19,12 +17,10 @@ import '../models/login_users_model/nosql_login.dart';
 import '../models/login_users_model/student_model.dart';
 import '../pages/splash_page/splash_page.dart';
 import '../pages/student_pages/attendance_page/attendance_page.dart';
-import '../pages/student_pages/chat_page/chat_main_page.dart';
 import '../pages/student_pages/dashboard_page/dashboard_page.dart';
 import '../pages/student_pages/login/login_page.dart';
 import '../pages/student_pages/quota_page/quota_page.dart';
 import '../pages/student_pages/settings_page/settings_page.dart';
-import '../pages/student_pages/task_page/tasks_page.dart';
 import '../services/http_service.dart';
 import '../services/language_service.dart';
 import '../services/nosql_service.dart';
@@ -147,14 +143,27 @@ class HomePageController extends GetxController with GetTickerProviderStateMixin
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SizedBox(height: 50,),
-                Text(
-                  "Choose an internship!",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 30
-                  ),
+                SizedBox(height: 80,),
+                Column(
+                  children: [
+                    Text(
+                      textAlign: TextAlign.center,
+                      "Amaliyotni Tanlang\nВыберите стажировку\nChoose an internship\n",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 30
+                      ),
+                    ),
+                    ClipRRect(
+                        borderRadius: BorderRadius.circular(8),
+                        child: Image.asset(
+                          "assets/images/interbutton.jpg",
+                          fit: BoxFit.contain,
+                          height: 150,
+                        ),
+                    ),
+                  ],
                 ),
               ]
             ),
@@ -332,19 +341,59 @@ class HomePageController extends GetxController with GetTickerProviderStateMixin
                 decoration: const BoxDecoration(
                   shape: BoxShape.circle,
                 ),
-                child: ClipOval(
-                  child: Image.network(
-                    student?.imageUrl ?? "",
-                    fit: BoxFit.cover,
-                    errorBuilder: (context, error, stackTrace) {
-                      return Image.asset("assets/images/npuu.png", fit: BoxFit.cover);
+                  child: GestureDetector(
+                    onTap: () {
+                      final imageUrl = student?.imageUrl ?? "";
+
+                      showDialog(
+                        context: context,
+                        barrierColor: Colors.black54,
+                        builder: (_) => Dialog(
+                          backgroundColor: Colors.transparent,
+                          insetPadding: const EdgeInsets.all(10),
+                          child: InteractiveViewer(
+                            minScale: 0.5,
+                            maxScale: 4,
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(12),
+                              child: imageUrl.isNotEmpty
+                                  ? Image.network(
+                                imageUrl,
+                                fit: BoxFit.contain,
+                                errorBuilder: (_, __, ___) => Image.asset(
+                                  "assets/images/npuu.png",
+                                  fit: BoxFit.contain,
+                                ),
+                              )
+                                  : Image.asset(
+                                "assets/images/npuu.png",
+                                fit: BoxFit.contain,
+                              ),
+                            ),
+                          ),
+                        ),
+                      );
                     },
-                    loadingBuilder: (context, child, loadingProgress) {
-                      if (loadingProgress == null) return child;
-                      return Image.asset("assets/images/npuu.png", fit: BoxFit.cover);
-                    },
+                    child: ClipOval(
+                      child: Image.network(
+                        student?.imageUrl ?? "",
+                        fit: BoxFit.cover,
+                        errorBuilder: (context, error, stackTrace) {
+                          return Image.asset(
+                            "assets/images/npuu.png",
+                            fit: BoxFit.cover,
+                          );
+                        },
+                        loadingBuilder: (context, child, loadingProgress) {
+                          if (loadingProgress == null) return child;
+                          return Image.asset(
+                            "assets/images/npuu.png",
+                            fit: BoxFit.cover,
+                          );
+                        },
+                      ),
+                    ),
                   ),
-                ),
               ),
               Expanded(
                     child: Column(

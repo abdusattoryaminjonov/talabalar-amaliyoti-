@@ -53,6 +53,7 @@ class _AttendancePageState extends State<AttendancePage> {
         NoSqlService.getLogin()!.accessToken,
       );
     });
+
   }
 
   @override

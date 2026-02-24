@@ -33,6 +33,7 @@ class AttendancePageController extends GetxController {
   String checkInLon = "";
   String checkOutLat = "";
   String checkOutLon = "";
+  bool isSubmitting = false;
 
   DateTime? kirishVaqti;
   String interName = "";
@@ -336,12 +337,20 @@ class AttendancePageController extends GetxController {
   }
 
   Future<void> loadData(int interId, String token) async {
+
+    if (interId == -1) {
+      attendancesMap.clear();
+      logsByDateList.clear();
+      isPageLoading = false;
+      update();
+      return;
+    }
+
     isPageLoading = true;
     update();
 
     try {
       final res = await httpService.getAttendance(token, interId);
-
 
       if (res.statusCode != 200) {
         attendancesMap.clear();
@@ -506,8 +515,8 @@ class AttendancePageController extends GetxController {
                             lat: lat,
                             lng: lng,
 
-                            // lat: "41.282200201287125",
-                            // lng: "69.27498458131157",
+                            // lat: "41.28243863555253",
+                            // lng: "69.27621973951122",
 
                             notes: finalNote,
                             buttonType: 'CHECK_OUT',
@@ -604,8 +613,9 @@ class AttendancePageController extends GetxController {
                             lat: lat,
                             lng: lng,
 
-                            // lat: "41.282200201287125",
-                            // lng: "69.27498458131157",
+                            // lat: "41.28243863555253",
+                            // lng: "69.27621973951122",
+
 
                             notes: finalNote,
                             buttonType: 'CHECK_IN',
@@ -779,9 +789,10 @@ class AttendancePageController extends GetxController {
       backgroundColor: Colors.transparent,
       builder: (context) {
         return DraggableScrollableSheet(
-          initialChildSize: 0.55,
-          minChildSize: 0.35,
-          maxChildSize: 0.9,
+
+          initialChildSize: 0.9,
+          minChildSize: 0.4,
+          maxChildSize: 1.0,
 
           builder: (context, scrollController) {
             return Container(
@@ -862,17 +873,34 @@ class AttendancePageController extends GetxController {
                       const SizedBox(width: 12),
                       Expanded(
                         child: TextButton(
-                          onPressed: () => Navigator.pop(context, controller.text.trim()),
+                          onPressed: isSubmitting
+                              ? null
+                              : () {
+                            isSubmitting = true;
+                            update();
+                            Navigator.pop(context, controller.text.trim());
+
+                            isSubmitting = false;
+                            update();
+                          },
                           style: TextButton.styleFrom(
-                            backgroundColor: AppColors.appActiveGreen,
+                            backgroundColor: isSubmitting
+                                ? AppColors.black50
+                                : AppColors.appActiveGreen,
                             foregroundColor: Colors.white,
                             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
                           ),
-                          child: Text(
-                            AppLocalizations.of(context)!.submitText,
-                          ),
+                          child: isSubmitting
+                              ? const SizedBox(
+                            width: 20,
+                            height: 20,
+                            child: CircularProgressIndicator(
+                              color: Colors.white,
+                              strokeWidth: 2,
+                            ),
+                          )
+                              : Text(AppLocalizations.of(context)!.submitText),
                         )
-                        ,
                       ),
                     ],
                   ),

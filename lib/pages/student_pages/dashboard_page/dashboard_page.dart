@@ -74,25 +74,23 @@ class _DashboardPageState extends State<DashboardPage> {
                 homeController.scaffoldKey.currentState?.openDrawer();
               },
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Text(
-                    dashboardController.getFirstName(student!.fullName),
-                    key: homeController.drawerOpenKey,
-                    style: TextStyle(
-                    color: AppColors.white,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: GoogleFonts.lato().fontFamily,
-                  ),),
-
-                  Icon(
-                    Icons.navigate_next_outlined,
-                    color: AppColors.white,
-                    // fontWeight: FontWeight.bold,
-                    weight: 700,
-                  )
-                ],
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      dashboardController.getFirstName(student!.fullName),
+                      key: homeController.drawerOpenKey,
+                      style: TextStyle(
+                        color: AppColors.white,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: GoogleFonts.lato().fontFamily,
+                      ),),
+                      Icon(
+                        Icons.navigate_next_outlined,
+                        color: AppColors.white,
+                        size: 28,
+                      ),
+                  ]
               ),
             ),
             // actions: [

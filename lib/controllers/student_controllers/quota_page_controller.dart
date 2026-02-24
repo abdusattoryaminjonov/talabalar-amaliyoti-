@@ -31,6 +31,15 @@ class QuotaPageController extends GetxController{
   int interId = -1;
 
   void loadData(String token, int id) async {
+
+    if (id == -1) {
+      quotaList = [];
+      quotaMap = {};
+      isLoading = false;
+      update();
+      return;
+    }
+
     isLoading = true;
     update();
 

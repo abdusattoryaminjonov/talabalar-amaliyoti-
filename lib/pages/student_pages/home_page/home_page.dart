@@ -6,6 +6,7 @@ import 'package:hive/hive.dart';
 import 'package:lottie/lottie.dart';
 import 'package:tap/languages/app_localizations.dart';
 import 'package:tap/services/app_color/theme_controller.dart';
+import 'package:tap/services/intranet/internet_service.dart';
 
 import '../../../constands/appcolors.dart';
 import '../../../controllers/home_page_controller.dart';
@@ -30,7 +31,6 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-
     homeController.selectedLang = LanguageService.getLanguageType();
     homeController.box = Hive.box<LoginUserData>('loginBox');
     homeController.studentBox = Hive.box<StudentModel>('studentBox');

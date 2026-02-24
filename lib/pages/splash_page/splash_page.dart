@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../languages/app_localizations.dart';
+import '../../models/login_users_model/nosql_login.dart';
 import '../../models/login_users_model/student_model.dart';
 import '../../services/http_service.dart';
 import '../../services/log_service.dart';
@@ -88,43 +89,63 @@ class _SplashPageState extends State<SplashPage> with SingleTickerProviderStateM
 
       }
 
-      else if (response.statusCode == 401 || response.statusCode == 403) {
-        ShowMessage.showMessage(
-          context,
-          AppLocalizations.of(context)!.dataIsOutdated,
-          AnimatedSnackBarType.info,
-        );
+      else if (response.statusCode == 401) {
+        LogService.d("401 bo'ldi");
+
+        final loginData = NoSqlService.getLogin();
+
+        if (loginData != null) {
+
+          final refreshResponse =
+          await httpService.refreshToken(loginData.refreshToken);
+
+          if (refreshResponse.statusCode == 200) {
+
+            final refreshJson = jsonDecode(refreshResponse.body);
+            final newLogin = LoginUserData.fromJson(refreshJson);
+
+            await NoSqlService.saveLogin(newLogin);
+
+            final retryResponse =
+            await httpService.getProfileData(newLogin.accessToken);
+
+            if (retryResponse.statusCode == 200) {
+              LogService.d("200 bo'ldi");
+
+              final jsonMap = jsonDecode(retryResponse.body);
+              final student =
+              StudentModel.fromJson(jsonMap['data']);
+
+              await NoSqlService.saveStudent(student);
+
+              if (!mounted) return;
+
+              Get.offAll(() => HomePage(),
+                  transition: Transition.fade,
+                  duration: const Duration(milliseconds: 350));
+
+              return;
+            }else{
+              Get.offAll(() => LoginPage());
+            }
+          }
+        }
 
         await NoSqlService.clearAllData();
 
         if (!mounted) return;
-        Navigator.pushAndRemoveUntil(
-          context,
-          PageRouteBuilder(
-            transitionDuration: const Duration(milliseconds: 350),
-            pageBuilder: (context, animation, secondaryAnimation) =>
-                LoginPage(),
-            transitionsBuilder: (context, animation, secondaryAnimation, child) {
-              return FadeTransition(
-                opacity: animation,
-                child: child,
-              );
-            },
-          ),
-              (Route<dynamic> route) => false,
-        );
 
-      }
+        Get.offAll(() => LoginPage());
 
-      else if (response.statusCode >= 500) {
+      } else if (response.statusCode >= 500) {
         ShowMessage.showMessage(
           context,
           AppLocalizations.of(context)!.serverError,
           AnimatedSnackBarType.error,
         );
-      }
-
-      else {
+      }else if (response.statusCode == 403) {
+        Get.offAll(() => LoginPage());
+      }else {
         LogService.e('Unexpected status: ${response.statusCode}');
         ShowMessage.showMessage(
           context,
@@ -170,8 +191,8 @@ class _SplashPageState extends State<SplashPage> with SingleTickerProviderStateM
             curve: Curves.easeInOut,
             child: Image.asset(
               'assets/images/uznpu.png',
-              width: 200,
-              height: 200,
+              width: 150,
+              height: 150,
               fit: BoxFit.contain,
             ),
           ),

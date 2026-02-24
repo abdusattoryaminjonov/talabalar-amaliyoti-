@@ -28,6 +28,25 @@ class HttpService {
     return response;
   }
 
+  Future<http.Response> refreshToken(String refreshToken) async {
+    final url = Uri.parse(
+        "https://apiyangi.uznpu.uz/tap-api/api/auth/refresh-token");
+
+    final body = jsonEncode({
+      "refreshToken": refreshToken,
+    });
+
+    final response = await http.post(
+      url,
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: body,
+    );
+
+    return response;
+  }
+
   Future<http.Response> updatePassword(String currentPass, String newPass, String confirmPass, String token) async {
     final url = Uri.parse("$BASE_URL/tap-api/api/auth/change-password");
 

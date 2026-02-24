@@ -271,7 +271,7 @@ abstract class AppLocalizations {
   /// No description provided for @notEnterTxt.
   ///
   /// In en, this message translates to:
-  /// **'NOT ENTERED'**
+  /// **'NO AVAILABLE'**
   String get notEnterTxt;
 
   /// No description provided for @toComeText.

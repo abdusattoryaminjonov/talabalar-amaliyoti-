@@ -95,7 +95,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get yesText => 'Yes';
 
   @override
-  String get notEnterTxt => 'NOT ENTERED';
+  String get notEnterTxt => 'NO AVAILABLE';
 
   @override
   String get toComeText => 'COMING';

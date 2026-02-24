@@ -1,12 +1,11 @@
-// import 'package:firebase_core/firebase_core.dart';
-// import 'package:firebase_messaging/firebase_messaging.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
+import 'package:overlay_support/overlay_support.dart';
 import 'package:tap/pages/splash_page/splash_page.dart';
 import 'package:tap/pages/student_pages/login/login_page.dart';
+import 'package:tap/services/intranet/internet_service.dart';
 import 'package:tap/services/language_service.dart';
 import 'package:tap/services/nosql_service.dart';
 import 'package:tap/services/root_service.dart';
@@ -33,8 +32,13 @@ void main() async{
   // await ThemeService.init();
   // Get.put(ThemeController(), permanent: true);
 
+  await InternetService.instance.initialize();
 
-  runApp(const MyApp());
+  runApp(
+    OverlaySupport.global(
+      child: MyApp(),
+    )
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -76,8 +80,15 @@ class MyApp extends StatelessWidget {
       fallbackLocale: const Locale('uz'),
 
       initialBinding: RootBinding(),
+      builder: (context, child) {
+        return MediaQuery(
+          data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
+          child: child!,
+        );
+      },
       home: (login != null && login.accessToken.isNotEmpty)
           ? SplashPage(token: login.accessToken, role: login.role)
+          // ? SplashPage(token: "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2Njg3NDc0IiwiaWF0IjoxNzcyMTcwOTk5LCJleHAiOjE3NzIxNzExNzl9.Rva6YC5loYLT6kC5dT4yqyxgE8KtqpheKQ5ZqP70bQI", role: login.role)
           : LoginPage(),
     );
   }
