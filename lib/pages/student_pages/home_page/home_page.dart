@@ -91,7 +91,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                   ? Colors.white
                   : AppColors.appActiveBlue,
               onPressed: () {
-                homeController.changePage(4);
+                homeController.changePage(2);
               },
               child: homeController.isLoading
                   ? SizedBox(

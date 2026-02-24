@@ -197,6 +197,7 @@ class LoginPageController extends GetxController{
 
     } catch (e) {
       showMessage(context,AppLocalizations.of(context)!.errorPlease, AnimatedSnackBarType.warning);
+      showMessage(context,AppLocalizations.of(context)!.connectionTimeout, AnimatedSnackBarType.error);
       LogService.e(e.toString());
       isLoading = false;
       update();
@@ -374,21 +375,21 @@ class LoginPageController extends GetxController{
                   ),
                 ),
 
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: TextButton(
-                    onPressed: () {
-
-                    },
-                    child: Text(
-                      AppLocalizations.of(context)!.forgotPass,
-                      style: TextStyle(
-                        color: AppColors.appActiveBlue,
-                        fontSize: 14,
-                      ),
-                    ),
-                  ),
-                ),
+                // Align(
+                //   alignment: Alignment.centerRight,
+                //   child: TextButton(
+                //     onPressed: () {
+                //
+                //     },
+                //     child: Text(
+                //       AppLocalizations.of(context)!.forgotPass,
+                //       style: TextStyle(
+                //         color: AppColors.appActiveBlue,
+                //         fontSize: 14,
+                //       ),
+                //     ),
+                //   ),
+                // ),
                 const Spacer(),
 
                 SizedBox(

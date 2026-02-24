@@ -61,13 +61,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get logsAndMap => 'Attempts';
 
   @override
-  String get nowInter => 'Current Interval';
+  String get nowInter => 'Current Internship';
 
   @override
-  String get notChoseInter => 'Interval not selected!';
+  String get notChoseInter => 'Select Internship to make the app work!';
 
   @override
-  String get interList => 'Intervals list';
+  String get interList => 'Internships list';
 
   @override
   String get interCheckIn => 'Selected';
@@ -77,6 +77,16 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get logOutContent => 'Are you sure you want to log out?';
+
+  @override
+  String get notQuota => 'Quota not available!';
+
+  @override
+  String get quota => 'Quota';
+
+  @override
+  String get quotaDesc =>
+      'Please note that if no information is displayed, please select the practice on the home page!';
 
   @override
   String get noText => 'No';
@@ -263,6 +273,19 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get noticeGetIt => 'I Understand';
+
+  @override
+  String get location => 'Location permission';
+
+  @override
+  String get goToSettings => 'Open settings';
+
+  @override
+  String get locationMessageDesc =>
+      'Location permission is disabled. Go to settings to enable it.\nThis app uses your location to verify your participation in an internship. For example, when you check in or out, we verify that you are at the designated internship location.';
+
+  @override
+  String get pleaseOnLoc => 'Please enable GPS.';
 
   @override
   String get buildingMarkerTitle => 'Internship Building';

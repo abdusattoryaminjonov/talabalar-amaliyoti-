@@ -65,7 +65,7 @@ class AppLocalizationsUz extends AppLocalizations {
   String get nowInter => 'Joriy amaliyot';
 
   @override
-  String get notChoseInter => 'Amaliyot tanlanmagan!';
+  String get notChoseInter => 'Ilova ishlashi uchun Amaliyotni tanlang!';
 
   @override
   String get interList => 'Amaliyotlar ro\'yxati';
@@ -78,6 +78,16 @@ class AppLocalizationsUz extends AppLocalizations {
 
   @override
   String get logOutContent => 'Siz rostdan ham tizimni tark etmoqchimisiz?';
+
+  @override
+  String get notQuota => 'Kvota mavjud emas!';
+
+  @override
+  String get quota => 'Kvota';
+
+  @override
+  String get quotaDesc =>
+      'Eslatib o\'tamiz agar hechqanday ma\'lumot ko\'rinmasa iltimos bosh sahifadagi  amaliyot bazasini tanlan!';
 
   @override
   String get noText => 'Yo\'q';
@@ -264,6 +274,19 @@ class AppLocalizationsUz extends AppLocalizations {
 
   @override
   String get noticeGetIt => 'Tushundim';
+
+  @override
+  String get location => 'Lokatsiya ruhsati';
+
+  @override
+  String get goToSettings => 'Sozlamalarni ochish';
+
+  @override
+  String get locationMessageDesc =>
+      'Joylashuv ruxsati o\'chirilgan. Uni yoqish uchun sozlamalarga o\'ting.\nUshbu ilova amaliyotga qatnashishingizni tekshirish uchun joylashuvingizdan foydalanadi. Masalan, siz ro\'yxatdan o\'tganingizda yoki chiqib ketganingizda, biz sizning belgilangan amaliyot joyida ekanligingizni tasdiqlaymiz.';
+
+  @override
+  String get pleaseOnLoc => 'Iltimos, GPS ni yoqing.';
 
   @override
   String get buildingMarkerTitle => 'Amaliyot binosi';

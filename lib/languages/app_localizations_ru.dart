@@ -62,13 +62,14 @@ class AppLocalizationsRu extends AppLocalizations {
   String get logsAndMap => 'Попытки';
 
   @override
-  String get nowInter => 'Текущий интервал';
+  String get nowInter => 'Текущая практика';
 
   @override
-  String get notChoseInter => 'Интервал не выбран!';
+  String get notChoseInter =>
+      'Выберите «Практика», чтобы приложение заработало!';
 
   @override
-  String get interList => 'Список интервалов';
+  String get interList => 'Список практик';
 
   @override
   String get interCheckIn => 'Выбрано';
@@ -78,6 +79,16 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get logOutContent => 'Вы уверены, что хотите выйти?';
+
+  @override
+  String get notQuota => 'Квота недоступна!';
+
+  @override
+  String get quota => 'Квота';
+
+  @override
+  String get quotaDesc =>
+      'Обратите внимание: если информация не отображается, выберите соответствующую практику на главной странице!';
 
   @override
   String get noText => 'Нет';
@@ -265,6 +276,19 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get noticeGetIt => 'Я понимаю';
+
+  @override
+  String get location => 'Разрешение на определение местоположения';
+
+  @override
+  String get goToSettings => 'Открыть настройки';
+
+  @override
+  String get locationMessageDesc =>
+      'Разрешение на определение местоположения отключено. Перейдите в настройки, чтобы включить его.\nЭто приложение использует ваше местоположение для подтверждения вашего участия в стажировке. Например, при регистрации прибытия или отъезда мы проверяем, что вы находитесь в указанном месте стажировки.';
+
+  @override
+  String get pleaseOnLoc => 'Пожалуйста, включите GPS.';
 
   @override
   String get buildingMarkerTitle => 'Практическое строительство';

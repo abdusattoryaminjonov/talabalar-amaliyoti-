@@ -73,9 +73,9 @@ class HomePageController extends GetxController with GetTickerProviderStateMixin
 
   late final List<Widget> pages = [
     DashboardPage(),
-    TasksPage(interName: interName, interId: interId),
+    // TasksPage(interName: interName, interId: interId),
     QuotaPage(token: token, interId: interId, interName: interName),
-    ChatMainPage(),
+    // ChatMainPage(),
     AttendancePage(interName: interName, interId: interId),
   ];
 
@@ -89,9 +89,9 @@ class HomePageController extends GetxController with GetTickerProviderStateMixin
 
   final iconList = <IconData>[
     Icons.home,
-    Icons.pending_actions,
+    // Icons.pending_actions,
     Icons.home_work_outlined,
-    Icons.chat_outlined,
+    // Icons.chat_outlined,
   ];
 
   // Future<void> requestPermission() async {

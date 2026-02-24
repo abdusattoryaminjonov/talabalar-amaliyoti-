@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:animated_snack_bar/animated_snack_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_udid/flutter_udid.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -55,54 +56,13 @@ class AttendancePageController extends GetxController {
     ).show(context);
   }
 
-  // Future<bool> checkLocationPermission(BuildContext context) async {
-  //   LocationPermission permission = await Geolocator.checkPermission();
-  //
-  //   if (permission == LocationPermission.denied) {
-  //     permission = await Geolocator.requestPermission();
-  //   }
-  //
-  //   if (permission == LocationPermission.deniedForever ||
-  //       permission == LocationPermission.denied) {
-  //     locationMessage = AppLocalizations.of(context)!.locationMessage;
-  //     update();
-  //     return false;
-  //   }
-  //
-  //   return true;
-  // }
-
-  // Future<bool> checkLocationPermission(BuildContext context) async {
-  //   bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
-  //
-  //   if (!serviceEnabled) {
-  //     await Geolocator.openLocationSettings();
-  //     return false;
-  //   }
-  //
-  //   LocationPermission permission = await Geolocator.checkPermission();
-  //
-  //   if (permission == LocationPermission.denied) {
-  //     permission = await Geolocator.requestPermission();
-  //   }
-  //
-  //   if (permission == LocationPermission.deniedForever) {
-  //     await Geolocator.openAppSettings();
-  //     return false;
-  //   }
-  //
-  //   if (permission == LocationPermission.denied) {
-  //     return false;
-  //   }
-  //
-  //   return true;
-  // }
-
   Future<bool> checkLocationPermission(BuildContext context) async {
     bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) {
-      locationMessage = AppLocalizations.of(context)!.locationMessage;
-      update();
+      _showLocationDialog(
+        context,
+        message: AppLocalizations.of(context)!.pleaseOnLoc,
+      );
       return false;
     }
 
@@ -113,6 +73,13 @@ class AttendancePageController extends GetxController {
     }
 
     if (permission == LocationPermission.deniedForever) {
+
+      _showLocationDialog(
+        context,
+        message:
+        AppLocalizations.of(context)!.locationMessageDesc,
+        openSettings: true,
+      );
       return false;
     }
 
@@ -120,11 +87,9 @@ class AttendancePageController extends GetxController {
       return false;
     }
 
+    await _getCurrentLocation();
     return true;
   }
-
-
-
 
   Future<void> _getCurrentLocation() async {
     Position position = await Geolocator.getCurrentPosition(
@@ -133,6 +98,232 @@ class AttendancePageController extends GetxController {
     LogService.i("${position.latitude} \n${position.longitude}");
     lat = position.latitude.toString();
     lng = position.longitude.toString();
+  }
+
+  void _showLocationDialog(
+      BuildContext context, {
+        required String message,
+        bool openSettings = false,
+      }) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title:  Text(AppLocalizations.of(context)!.location,textAlign: TextAlign.center,),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(message,textAlign: TextAlign.center,),
+            SizedBox(height: 10,),
+            Row(
+              children: [
+                Expanded(
+                  child: GestureDetector(
+                    onTap: () {
+                      showDialog(
+                        context: context,
+                        builder: (_) => Dialog(
+                          child: InteractiveViewer(
+                            child: Image.asset(
+                              Platform.isIOS
+                                  ? "assets/images/imgL2.jpg"
+                                  : "assets/images/androidImg2.jpg",
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(8),
+                      child: Image.asset(
+                        Platform.isIOS
+                            ? "assets/images/imgL2.jpg"
+                            : "assets/images/androidImg2.jpg",
+                        fit: BoxFit.contain,
+                        height: 150,
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: GestureDetector(
+                    onTap: () {
+                      showDialog(
+                        context: context,
+                        builder: (_) => Dialog(
+                          child: InteractiveViewer(
+                            child: Image.asset(
+                              Platform.isIOS
+                                  ? "assets/images/imgL1.jpg"
+                                  : "assets/images/androidImg1.jpg",
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(8),
+                      child: Image.asset(
+                        Platform.isIOS
+                            ? "assets/images/imgL1.jpg"
+                            : "assets/images/androidImg1.jpg",
+                        fit: BoxFit.contain,
+                        height: 150,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child:  Text(AppLocalizations.of(context)!.cancelText),
+          ),
+          if (openSettings)
+            TextButton(
+              onPressed: () async {
+                Navigator.pop(context);
+                await Geolocator.openAppSettings();
+              },
+              child:  Text(AppLocalizations.of(context)!.goToSettings),
+            ),
+        ],
+      ),
+    );
+  }
+
+  Widget notData(BuildContext context){
+    return Padding(
+      padding: const EdgeInsets.all(20),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Text(
+            AppLocalizations.of(context)!.notChoseInter,
+            style: TextStyle(
+                fontSize: 23,
+                fontWeight: FontWeight.bold
+            ),
+            textAlign: TextAlign.center,
+          ),
+          SizedBox(height: 8),
+          Text(
+            textAlign: TextAlign.center,
+            AppLocalizations.of(context)!.quotaDesc,
+            style: TextStyle(fontStyle: FontStyle.italic),
+          ),
+          SizedBox(height: 8),
+          Row(
+            children: [
+              Expanded(
+                child: Column(
+                  children: [
+                    Text("1"),
+                    GestureDetector(
+                      onTap: () {
+                        showDialog(
+                          context: context,
+                          builder: (_) => Dialog(
+                            child: InteractiveViewer(
+                              child: Image.asset(
+                                Platform.isIOS
+                                    ? "assets/images/home.png"
+                                    : "assets/images/home.png",
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(8),
+                        child: Image.asset(
+                          Platform.isIOS
+                              ? "assets/images/home.png"
+                              : "assets/images/home.png",
+                          fit: BoxFit.contain,
+                          height: 150,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(width: 8),
+              Expanded(
+                child: Column(
+                  children: [
+                    Text("2"),
+                    GestureDetector(
+                      onTap: () {
+                        showDialog(
+                          context: context,
+                          builder: (_) => Dialog(
+                            child: InteractiveViewer(
+                              child: Image.asset(
+                                Platform.isIOS
+                                    ? "assets/images/drawerimage.jpg"
+                                    : "assets/images/drawerimage.jpg",
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(8),
+                        child: Image.asset(
+                          Platform.isIOS
+                              ? "assets/images/drawerimage.jpg"
+                              : "assets/images/drawerimage.jpg",
+                          fit: BoxFit.contain,
+                          height: 150,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(width: 8),
+              Expanded(
+                child: Column(
+                  children: [
+                    Text("3"),
+                    GestureDetector(
+                      onTap: () {
+                        showDialog(
+                          context: context,
+                          builder: (_) => Dialog(
+                            child: InteractiveViewer(
+                              child: Image.asset(
+                                Platform.isIOS
+                                    ? "assets/images/clickImage.jpg"
+                                    : "assets/images/clickImage.jpg",
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(8),
+                        child: Image.asset(
+                          Platform.isIOS
+                              ? "assets/images/clickImage.jpg"
+                              : "assets/images/clickImage.jpg",
+                          fit: BoxFit.contain,
+                          height: 150,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
   }
 
   Future<bool> isMockLocation() async {
@@ -276,21 +467,17 @@ class AttendancePageController extends GetxController {
                   width: MediaQuery.of(context).size.width * 0.42,
                   child: ElevatedButton.icon(
                     onPressed: () async {
+                      // String udId = await FlutterUdid.udid;
+                      // String deviceId = "";
+                      // deviceId = udId;
+                      //
+                      // LogService.e(deviceId);
+                      // NoSqlService.updateUserDevice(udId);
+
                       bool hasPermission = await checkLocationPermission(context);
-
-                      if (!hasPermission) {
-                        ShowDialogHelper.showCustomDialog(
-                          context,
-                          "Iltimos, lokatsiya ruxsatini yoqing",
-                          AppColors.red,
-                        );
-                        return;
-                      }
-
-                      // bool hasPermission = await checkLocationPermission(context);
                       if (!hasPermission) return;
 
-                      String? note = await showNoteDialog(context, isCheckIn: true);
+                      String? note = await showNoteDialog(context, isCheckIn: false);
                       if (note == null) return;
 
                       String finalNote = note.isEmpty ? "Assalomu Aleykum" : note;
@@ -319,8 +506,8 @@ class AttendancePageController extends GetxController {
                             lat: lat,
                             lng: lng,
 
-                            // lat: "41.271973761911",
-                            // lng: "69.20197200072812",
+                            // lat: "41.282200201287125",
+                            // lng: "69.27498458131157",
 
                             notes: finalNote,
                             buttonType: 'CHECK_OUT',
@@ -383,16 +570,6 @@ class AttendancePageController extends GetxController {
                   child: ElevatedButton.icon(
                     onPressed: () async {
                       bool hasPermission = await checkLocationPermission(context);
-
-                      if (!hasPermission) {
-                        ShowDialogHelper.showCustomDialog(
-                          context,
-                          "Iltimos, lokatsiya ruxsatini yoqing",
-                          AppColors.red,
-                        );
-                        return;
-                      }
-                      // bool hasPermission = await checkLocationPermission(context);
                       if (!hasPermission) return;
 
                       String? note = await showNoteDialog(context, isCheckIn: true);
@@ -427,8 +604,9 @@ class AttendancePageController extends GetxController {
                             lat: lat,
                             lng: lng,
 
-                            // lat: "41.271973761911",
-                            // lng: "69.20197200072812",
+                            // lat: "41.282200201287125",
+                            // lng: "69.27498458131157",
+
                             notes: finalNote,
                             buttonType: 'CHECK_IN',
                           );
@@ -584,7 +762,7 @@ class AttendancePageController extends GetxController {
   Future<String?> showNoteDialog(BuildContext context, {required bool isCheckIn}) async {
     TextEditingController controller = TextEditingController();
 
-    List<String> suggestions = !isCheckIn
+    List<String> suggestions = isCheckIn
         ? [
       "Men amaliyot joyidaman.",
       "Amaliyotni boshladim.",
@@ -636,7 +814,7 @@ class AttendancePageController extends GetxController {
 
 
                   Text(
-                    !isCheckIn ? AppLocalizations.of(context)!.comIn : AppLocalizations.of(context)!.comOut,
+                    isCheckIn ? AppLocalizations.of(context)!.comIn : AppLocalizations.of(context)!.comOut,
                     style: const TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,

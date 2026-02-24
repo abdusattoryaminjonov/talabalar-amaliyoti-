@@ -88,7 +88,7 @@ class _AttendancePageState extends State<AttendancePage> {
               ),
               SizedBox(width: 5)
             ],
-            leading: InkWell(
+            leading: controller.interId == -1 ? SizedBox.shrink() : InkWell(
               onTap: () {
                 Navigator.push(context, MaterialPageRoute(
                   builder: (context) => LogsAndMap(logsByDateList: attendancePageController.logsByDateList,expectedLat: double.parse(attendancePageController.expectedLat),expectedLon:  double.parse(attendancePageController.expectedLon),),
@@ -103,7 +103,8 @@ class _AttendancePageState extends State<AttendancePage> {
               ),
             ),
           ),
-          body: SmartRefresher(
+          body: controller.interId == -1 ?
+          controller.notData(context) : SmartRefresher(
             controller: controller.refreshController,
             enablePullDown: true,
             header: WaterDropHeader(

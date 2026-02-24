@@ -1,8 +1,11 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive/hive.dart';
 import 'package:lottie/lottie.dart';
+import 'package:tap/languages/app_localizations.dart';
 import '../../../constands/appcolors.dart';
 
 import '../../../controllers/student_controllers/quota_page_controller.dart';
@@ -42,7 +45,7 @@ class _QuotaPageState extends State<QuotaPage> {
       appBar: AppBar(
         backgroundColor: AppColors.appActiveBlue,
         title: Text(
-          'Kvota',
+          AppLocalizations.of(context)!.quota,
           style: TextStyle(
             color: AppColors.white,
             fontWeight: FontWeight.bold,
@@ -51,7 +54,8 @@ class _QuotaPageState extends State<QuotaPage> {
         ),
         centerTitle: true,
       ),
-      body: SafeArea(
+      body: quotaPageController.interId == -1 ?
+        quotaPageController.notQuota(context) :SafeArea(
         child: SingleChildScrollView(
           child: Column(
             children: [
@@ -76,7 +80,7 @@ class _QuotaPageState extends State<QuotaPage> {
                   if (quotaPageController.quotaMap.isNotEmpty){
                     return quotaPageController.quotaItem(quotaPageController.quotaMap ,context);
                   }
-                  return const Center(child: Text("Kvota mavjud emas"));
+                  return  Center(child: Text(AppLocalizations.of(context)!.notQuota));
                 },
               ),
             ],

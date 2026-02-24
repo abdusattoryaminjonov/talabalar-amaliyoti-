@@ -489,7 +489,8 @@ class DashboardPageController extends GetxController{
               ),
               TextButton(
                 onPressed: (){
-                  homeController.changePage(4);
+                  // homeController.changePage(4);
+                  homeController.changePage(2);
                 },
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,

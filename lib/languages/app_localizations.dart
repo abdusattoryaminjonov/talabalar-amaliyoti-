@@ -205,19 +205,19 @@ abstract class AppLocalizations {
   /// No description provided for @nowInter.
   ///
   /// In en, this message translates to:
-  /// **'Current Interval'**
+  /// **'Current Internship'**
   String get nowInter;
 
   /// No description provided for @notChoseInter.
   ///
   /// In en, this message translates to:
-  /// **'Interval not selected!'**
+  /// **'Select Internship to make the app work!'**
   String get notChoseInter;
 
   /// No description provided for @interList.
   ///
   /// In en, this message translates to:
-  /// **'Intervals list'**
+  /// **'Internships list'**
   String get interList;
 
   /// No description provided for @interCheckIn.
@@ -237,6 +237,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Are you sure you want to log out?'**
   String get logOutContent;
+
+  /// No description provided for @notQuota.
+  ///
+  /// In en, this message translates to:
+  /// **'Quota not available!'**
+  String get notQuota;
+
+  /// No description provided for @quota.
+  ///
+  /// In en, this message translates to:
+  /// **'Quota'**
+  String get quota;
+
+  /// No description provided for @quotaDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Please note that if no information is displayed, please select the practice on the home page!'**
+  String get quotaDesc;
 
   /// No description provided for @noText.
   ///
@@ -597,6 +615,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'I Understand'**
   String get noticeGetIt;
+
+  /// No description provided for @location.
+  ///
+  /// In en, this message translates to:
+  /// **'Location permission'**
+  String get location;
+
+  /// No description provided for @goToSettings.
+  ///
+  /// In en, this message translates to:
+  /// **'Open settings'**
+  String get goToSettings;
+
+  /// No description provided for @locationMessageDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Location permission is disabled. Go to settings to enable it.\nThis app uses your location to verify your participation in an internship. For example, when you check in or out, we verify that you are at the designated internship location.'**
+  String get locationMessageDesc;
+
+  /// No description provided for @pleaseOnLoc.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enable GPS.'**
+  String get pleaseOnLoc;
 
   /// No description provided for @buildingMarkerTitle.
   ///

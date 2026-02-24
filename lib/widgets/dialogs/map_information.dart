@@ -148,8 +148,8 @@ void showMapInformation(BuildContext context) {
                                 child: InteractiveViewer(
                                   child: Image.asset(
                                     Platform.isIOS
-                                        ? "assets/images/home.jpg"
-                                        : "assets/images/home.jpg",
+                                        ? "assets/images/home.png"
+                                        : "assets/images/home.png",
                                   ),
                                 ),
                               ),
@@ -159,8 +159,8 @@ void showMapInformation(BuildContext context) {
                             borderRadius: BorderRadius.circular(8),
                             child: Image.asset(
                               Platform.isIOS
-                                  ? "assets/images/home.jpg"
-                                  : "assets/images/home.jpg",
+                                  ? "assets/images/home.png"
+                                  : "assets/images/home.png",
                               fit: BoxFit.contain,
                               height: 150,
                             ),

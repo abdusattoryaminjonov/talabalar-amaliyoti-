@@ -95,66 +95,66 @@ class _DashboardPageState extends State<DashboardPage> {
                 ],
               ),
             ),
-            actions: [
-              IconButton(
-                onPressed: (){
-                  ShowMessage.showMessage(context,AppLocalizations.of(context)!.notWorking, AnimatedSnackBarType.info);
-                },
-                // dashboardController.goToRatingPage(context);
-
-
-                icon: Icon(Icons.star_border),
-                color: Colors.white,
-                iconSize: 30,
-              ),
-              GestureDetector(
-                onTap: (){
-                  dashboardController.goToNotificationPage(context);
-                },
-                child: Stack(
-                  children: [
-                    IconButton(
-                      onPressed: () {
-                        ShowMessage.showMessage(context,AppLocalizations.of(context)!.notWorking, AnimatedSnackBarType.info);
-                      },
-
-                      // dashboardController.goToNotificationPage(context);
-
-                      icon: const Icon(
-                        Icons.notifications,
-                        color: Colors.white,
-                      ),
-                      iconSize: 30,
-                    ),
-
-                    dashboardController.notLength != 0 ? Positioned(
-                      right: 8,
-                      top: 8,
-                      child: Container(
-                        padding: const EdgeInsets.all(4),
-                        decoration: BoxDecoration(
-                          color: Colors.redAccent,
-                          shape: BoxShape.circle,
-                        ),
-                        constraints: const BoxConstraints(
-                          minWidth: 18,
-                          minHeight: 18,
-                        ),
-                        child: Text(
-                          dashboardController.notLength.toString(),
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 11,
-                            fontWeight: FontWeight.bold,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                    ) : SizedBox.shrink(),
-                  ],
-                ),
-              )
-            ],
+            // actions: [
+            //   IconButton(
+            //     onPressed: (){
+            //       ShowMessage.showMessage(context,AppLocalizations.of(context)!.notWorking, AnimatedSnackBarType.info);
+            //     },
+            //     // dashboardController.goToRatingPage(context);
+            //
+            //
+            //     icon: Icon(Icons.star_border),
+            //     color: Colors.white,
+            //     iconSize: 30,
+            //   ),
+            //   GestureDetector(
+            //     onTap: (){
+            //       dashboardController.goToNotificationPage(context);
+            //     },
+            //     child: Stack(
+            //       children: [
+            //         IconButton(
+            //           onPressed: () {
+            //             ShowMessage.showMessage(context,AppLocalizations.of(context)!.notWorking, AnimatedSnackBarType.info);
+            //           },
+            //
+            //           // dashboardController.goToNotificationPage(context);
+            //
+            //           icon: const Icon(
+            //             Icons.notifications,
+            //             color: Colors.white,
+            //           ),
+            //           iconSize: 30,
+            //         ),
+            //
+            //         dashboardController.notLength != 0 ? Positioned(
+            //           right: 8,
+            //           top: 8,
+            //           child: Container(
+            //             padding: const EdgeInsets.all(4),
+            //             decoration: BoxDecoration(
+            //               color: Colors.redAccent,
+            //               shape: BoxShape.circle,
+            //             ),
+            //             constraints: const BoxConstraints(
+            //               minWidth: 18,
+            //               minHeight: 18,
+            //             ),
+            //             child: Text(
+            //               dashboardController.notLength.toString(),
+            //               style: TextStyle(
+            //                 color: Colors.white,
+            //                 fontSize: 11,
+            //                 fontWeight: FontWeight.bold,
+            //               ),
+            //               textAlign: TextAlign.center,
+            //             ),
+            //           ),
+            //         ) : SizedBox.shrink(),
+            //       ],
+            //     ),
+            //   )
+            // ],
           ),
           body:  Stack(
             children: [

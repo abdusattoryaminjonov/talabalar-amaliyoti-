@@ -23,11 +23,16 @@
   "logsAndMap": "Urinishlar",
 
   "nowInter" : "Joriy amaliyot",
-  "notChoseInter" : "Amaliyot tanlanmagan!",
+  "notChoseInter" : "Ilova ishlashi uchun Amaliyotni tanlang!",
   "interList" : "Amaliyotlar ro'yxati",
   "interCheckIn": "Tanlandi",
   "logOutTitle" : "Tizimdan chiqish",
   "logOutContent" : "Siz rostdan ham tizimni tark etmoqchimisiz?",
+
+  "notQuota" : "Kvota mavjud emas!",
+  "quota" : "Kvota",
+
+  "quotaDesc" : "Eslatib o'tamiz agar hechqanday ma'lumot ko'rinmasa iltimos bosh sahifadagi  amaliyot bazasini tanlan!",
 
   "noText" : "Yo'q",
   "yesText" : "Ha",
@@ -107,6 +112,12 @@
   "noticeText7" : "Ilova faqat uning ishlashi uchun zarur bo'lgan minimal ma'lumotlarni to'playdi.\nBarcha ma'lumotlar xavfsiz saqlanadi va uchinchi tomonlar bilan sotilmaydi yoki ulashilmaydi.",
   "noticeGetIt" : "Tushundim",
   "buildingMarkerTitle" : "Amaliyot binosi",
+
+  "location" : "Lokatsiya ruhsati",
+  "goToSettings" : "Sozlamalarni ochish",
+  "locationMessageDesc" : "Joylashuv ruxsati o'chirilgan. Uni yoqish uchun sozlamalarga o'ting.\nUshbu ilova amaliyotga qatnashishingizni tekshirish uchun joylashuvingizdan foydalanadi. Masalan, siz ro'yxatdan o'tganingizda yoki chiqib ketganingizda, biz sizning belgilangan amaliyot joyida ekanligingizni tasdiqlaymiz.",
+  "pleaseOnLoc" : "Iltimos, GPS ni yoqing.",
+
 
   "iTitle" : "Belgilar Ta'rifi",
   "iDate" : "Sana",

@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:animated_snack_bar/animated_snack_bar.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +9,7 @@ import 'package:hive/hive.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../constands/appcolors.dart';
+import '../../languages/app_localizations.dart';
 import '../../models/login_users_model/internship_model.dart';
 import '../../pages/student_pages/login/login_page.dart';
 import '../../services/http_service.dart';
@@ -63,6 +65,137 @@ class QuotaPageController extends GetxController{
 
     isLoading = false;
     update();
+  }
+
+  Widget notQuota(BuildContext context){
+    return Padding(
+      padding: const EdgeInsets.all(20),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Text(
+              AppLocalizations.of(context)!.notChoseInter,
+            style: TextStyle(
+              fontSize: 23,
+              fontWeight: FontWeight.bold
+            ),
+            textAlign: TextAlign.center,
+          ),
+          SizedBox(height: 8),
+          Text(
+            textAlign: TextAlign.center,
+            AppLocalizations.of(context)!.quotaDesc,
+            style: TextStyle(fontStyle: FontStyle.italic),
+          ),
+          SizedBox(height: 8),
+          Row(
+            children: [
+              Expanded(
+                child: Column(
+                  children: [
+                    Text("1"),
+                    GestureDetector(
+                      onTap: () {
+                        showDialog(
+                          context: context,
+                          builder: (_) => Dialog(
+                            child: InteractiveViewer(
+                              child: Image.asset(
+                                Platform.isIOS
+                                    ? "assets/images/home.png"
+                                    : "assets/images/home.png",
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(8),
+                        child: Image.asset(
+                          Platform.isIOS
+                              ? "assets/images/home.png"
+                              : "assets/images/home.png",
+                          fit: BoxFit.contain,
+                          height: 150,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(width: 8),
+              Expanded(
+                child: Column(
+                  children: [
+                    Text("2"),
+                    GestureDetector(
+                      onTap: () {
+                        showDialog(
+                          context: context,
+                          builder: (_) => Dialog(
+                            child: InteractiveViewer(
+                              child: Image.asset(
+                                Platform.isIOS
+                                    ? "assets/images/drawerimage.jpg"
+                                    : "assets/images/drawerimage.jpg",
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(8),
+                        child: Image.asset(
+                          Platform.isIOS
+                              ? "assets/images/drawerimage.jpg"
+                              : "assets/images/drawerimage.jpg",
+                          fit: BoxFit.contain,
+                          height: 150,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(width: 8),
+              Expanded(
+                child: Column(
+                  children: [
+                    Text("3"),
+                    GestureDetector(
+                      onTap: () {
+                        showDialog(
+                          context: context,
+                          builder: (_) => Dialog(
+                            child: InteractiveViewer(
+                              child: Image.asset(
+                                Platform.isIOS
+                                    ? "assets/images/clickImage.jpg"
+                                    : "assets/images/clickImage.jpg",
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(8),
+                        child: Image.asset(
+                          Platform.isIOS
+                              ? "assets/images/clickImage.jpg"
+                              : "assets/images/clickImage.jpg",
+                          fit: BoxFit.contain,
+                          height: 150,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
   }
 
   Widget quotaListBuilder(List<dynamic> quotaList1,String token, int interId){
